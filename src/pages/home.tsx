@@ -13,6 +13,7 @@ import {
   MailFilled,
 } from "@ant-design/icons";
 import Slider from "../features/slider";
+import { LoginForm } from "../features/loginForm";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -195,6 +196,7 @@ const Home = () => {
             }}
           >
             <Slider />
+            <LoginForm />
           </Content>
         </Layout>
       </Layout>

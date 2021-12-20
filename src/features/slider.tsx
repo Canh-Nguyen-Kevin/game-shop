@@ -46,12 +46,6 @@ const Slider = () => {
         style={{ width: "30%", display: "flex", flexDirection: "column" }}
       >
         {renderBanner()}
-        {/* {BannerImages &&
-          BannerImages.map((item) => {
-            return (
-              <img src={item.image} alt="image" style={{ width: "100%" }} />
-            );
-          })} */}
       </div>
     </div>
   );
