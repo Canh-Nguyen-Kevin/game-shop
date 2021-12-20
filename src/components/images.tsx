@@ -1,4 +1,4 @@
-const SliderImages = [
+export const SliderImages = [
   {
     id: 1,
     image: "images/img1.png",
@@ -24,8 +24,8 @@ const SliderImages = [
     image: "images/img7.png",
   },
 ];
-export default SliderImages;
-const BannerImages = [
+
+export const BannerImages = [
   {
     id: 1,
     image: "images/adobe.png",
@@ -35,4 +35,3 @@ const BannerImages = [
     image: "images/youtube.png",
   },
 ];
-export { BannerImages };

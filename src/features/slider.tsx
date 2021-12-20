@@ -2,13 +2,18 @@ import { Carousel } from "antd";
 import CSS from "csstype";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./slider.css";
-import SliderImages, { BannerImages } from "../components/images";
+import { SliderImages, BannerImages } from "../components/images";
 
 const contentStyle: CSS.Properties = {
   width: "70%",
   height: "50vh",
   color: "#fff",
   fontSize: "1.5rem",
+};
+const renderBanner = () => {
+  return BannerImages.map((item) => {
+    return <img src={item.image} alt="image" key={item.id} />;
+  });
 };
 
 const Slider = () => {
@@ -40,12 +45,13 @@ const Slider = () => {
         className="banner"
         style={{ width: "30%", display: "flex", flexDirection: "column" }}
       >
-        {BannerImages &&
+        {renderBanner()}
+        {/* {BannerImages &&
           BannerImages.map((item) => {
             return (
               <img src={item.image} alt="image" style={{ width: "100%" }} />
             );
-          })}
+          })} */}
       </div>
     </div>
   );
