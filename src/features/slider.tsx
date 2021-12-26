@@ -10,6 +10,23 @@ const contentStyle: CSS.Properties = {
   color: "#fff",
   fontSize: "1.5rem",
 };
+const renderSlider = () => {
+  return (
+    SliderImages &&
+    SliderImages.map((item) => {
+      return (
+        <div key={item.id}>
+          <img
+            className="sliderImages"
+            src={item.image}
+            alt="image"
+            style={{ width: "100%", height: "50vh" }}
+          />
+        </div>
+      );
+    })
+  );
+};
 const renderBanner = () => {
   return BannerImages.map((item) => {
     return <img src={item.image} alt="image" key={item.id} />;
@@ -26,19 +43,7 @@ const Slider = () => {
           prevArrow={<LeftOutlined />}
           nextArrow={<RightOutlined />}
         >
-          {SliderImages &&
-            SliderImages.map((item) => {
-              return (
-                <div key={item.id}>
-                  <img
-                    className="sliderImages"
-                    src={item.image}
-                    alt="image"
-                    style={{ width: "100%", height: "50vh" }}
-                  />
-                </div>
-              );
-            })}
+          {renderSlider()}
         </Carousel>
       </div>
       <div
@@ -46,12 +51,6 @@ const Slider = () => {
         style={{ width: "30%", display: "flex", flexDirection: "column" }}
       >
         {renderBanner()}
-        {/* {BannerImages &&
-          BannerImages.map((item) => {
-            return (
-              <img src={item.image} alt="image" style={{ width: "100%" }} />
-            );
-          })} */}
       </div>
     </div>
   );
