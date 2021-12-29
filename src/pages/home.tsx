@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { showForm, hideForm, formState } from "../features/counter/formSlice";
 import { Layout, Input, Menu, Breadcrumb, Badge, Avatar } from "antd";
 import { Typography, Space, Dropdown, Button, message, Tooltip } from "antd";
 import "antd/dist/antd.css";
@@ -13,6 +15,7 @@ import {
   MailFilled,
 } from "@ant-design/icons";
 import Slider from "../features/slider";
+import "./home.css";
 import { LoginForm } from "../features/loginForm";
 
 const { SubMenu } = Menu;
@@ -23,57 +26,62 @@ const { Search } = Input;
 const onSearch = (value: string) => {
   console.log(value);
 };
-function handleMenuClick(e: any) {
-  message.info("Click on menu item.");
-  console.log("click", e);
-}
-const menu = (
-  <Menu
-    onClick={handleMenuClick}
-    style={{ width: 230, height: "auto", marginTop: 15, borderRadius: 5 }}
-  >
-    <Menu.Item
-      key="1"
-      icon={<UserOutlined />}
-      style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
+
+const LoginMenu = () => {
+  const dispatch = useAppDispatch();
+  function handleMenuClick(e: any) {
+    dispatch(showForm());
+    message.info("Click on menu item.");
+    console.log("click", e);
+  }
+  return (
+    <Menu
+      onClick={handleMenuClick}
+      style={{ width: 230, height: "auto", marginTop: 15, borderRadius: 5 }}
     >
-      Login
-    </Menu.Item>
-    <Menu.Item
-      key="2"
-      icon={<UserOutlined />}
-      style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
-    >
-      Sign up
-    </Menu.Item>
-    <Menu.Item
-      key="3"
-      icon={<FacebookFilled />}
-      style={{
-        margin: 15,
-        borderRadius: 5,
-        backgroundColor: "#096dd9",
-        color: "white",
-      }}
-    >
-      Login with Facebook
-    </Menu.Item>
-    <Menu.Item
-      key="4"
-      icon={<MailFilled />}
-      style={{
-        margin: 15,
-        borderRadius: 5,
-        backgroundColor: "#f5222d",
-        color: "white",
-      }}
-    >
-      Login with Google
-    </Menu.Item>
-  </Menu>
-);
+      <Menu.Item
+        key="1"
+        icon={<UserOutlined />}
+        style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
+      >
+        Login
+      </Menu.Item>
+      <Menu.Item
+        key="2"
+        icon={<UserOutlined />}
+        style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
+      >
+        Sign up
+      </Menu.Item>
+      <Menu.Item
+        key="3"
+        icon={<FacebookFilled />}
+        style={{
+          margin: 15,
+          borderRadius: 5,
+          backgroundColor: "#096dd9",
+          color: "white",
+        }}
+      >
+        Login with Facebook
+      </Menu.Item>
+      <Menu.Item
+        key="4"
+        icon={<MailFilled />}
+        style={{
+          margin: 15,
+          borderRadius: 5,
+          backgroundColor: "#f5222d",
+          color: "white",
+        }}
+      >
+        Login with Google
+      </Menu.Item>
+    </Menu>
+  );
+};
 const ItemsInCart = (
-  <Menu onClick={handleMenuClick} style={{ width: 400, height: 250 }}>
+  <Menu style={{ width: 400, height: 250 }}>
     <Menu.Item key="1" icon={<ShoppingCartOutlined />}>
       Current Cart
     </Menu.Item>
@@ -84,8 +92,13 @@ const ItemsInCart = (
 );
 
 const Home = () => {
+  const stateOfForm = useAppSelector(formState);
+  const dispatch = useAppDispatch();
   return (
-    <Layout>
+    <Layout className="mainLayout" style={{ opacity: stateOfForm ? 0.5 : 1 }}>
+      <div className="form" onClick={(e) => e.stopPropagation()}>
+        {stateOfForm ? <LoginForm /> : null}
+      </div>
       <Header
         className="header"
         style={{
@@ -130,7 +143,7 @@ const Home = () => {
           />
           <Dropdown.Button
             style={{ backgroundColor: "transparent", color: "red" }}
-            overlay={menu}
+            overlay={<LoginMenu />}
             placement="bottomCenter"
             icon={<UserOutlined />}
           ></Dropdown.Button>
@@ -196,7 +209,6 @@ const Home = () => {
             }}
           >
             <Slider />
-            <LoginForm />
           </Content>
         </Layout>
       </Layout>

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { showForm, hideForm, formState } from "../features/counter/formSlice";
 import {
   Form,
   Input,
@@ -17,7 +19,7 @@ import {
   UserOutlined,
   PhoneOutlined,
   LockOutlined,
-  ShoppingCartOutlined,
+  CloseCircleFilled,
   FacebookFilled,
   MailFilled,
 } from "@ant-design/icons";
@@ -50,12 +52,9 @@ const onFinish = (values: any) => {
 };
 
 const Register = () => {
-  // const [form] = Form.useForm();
   return (
     <Form
       {...formItemLayout}
-      // form={form}
-
       name="register"
       onFinish={onFinish}
       labelAlign="left"
@@ -192,17 +191,23 @@ const Login = () => {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
 
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
+      <Form.Item>
+        <Row>
+          <Col span={12}>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <a className="login-form-forgot" href="">
+              Forgot password
+            </a>
+          </Col>
+        </Row>
       </Form.Item>
 
-      <Form.Item>
+      <Form.Item style={{ justifyContent: "center" }}>
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
@@ -214,18 +219,37 @@ const Login = () => {
 const LoginDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
-      <Card title="Login" bordered={false} style={{ width: 300 }}>
+      <Card title="Login" bordered={false}>
         <img src="images/person.png" alt="image" />
       </Card>
     </div>
   );
 };
+
 export const LoginForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
-
+  const dispatch = useAppDispatch();
   return (
     <>
-      <Row className="site-layout-background">
+      <Row
+        className="site-layout-background"
+        style={{
+          backgroundColor: "white",
+          width: "60vw",
+          height: "60vh",
+          position: "relative",
+        }}
+      >
+        <CloseCircleFilled
+          style={{
+            fontSize: "2rem",
+            position: "absolute",
+            top: "-15px",
+            right: "-15px",
+            zIndex: 100,
+          }}
+          onClick={() => dispatch(hideForm())}
+        />
         <Col span={12}>{isLoginForm ? LoginDes() : RegisterDes()}</Col>
         <Col span={12}>
           <div
