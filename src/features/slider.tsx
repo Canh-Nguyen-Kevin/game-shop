@@ -11,21 +11,18 @@ const contentStyle: CSS.Properties = {
   fontSize: "1.5rem",
 };
 const renderSlider = () => {
-  return (
-    SliderImages &&
-    SliderImages.map((item) => {
-      return (
-        <div key={item.id}>
-          <img
-            className="sliderImages"
-            src={item.image}
-            alt="image"
-            style={{ width: "100%", height: "50vh" }}
-          />
-        </div>
-      );
-    })
-  );
+  return SliderImages.map((item) => {
+    return (
+      <div key={item.id}>
+        <img
+          className="sliderImages"
+          src={item.image}
+          alt="image"
+          style={{ width: "100%", height: "50vh" }}
+        />
+      </div>
+    );
+  });
 };
 const renderBanner = () => {
   return BannerImages.map((item) => {
