@@ -12,6 +12,7 @@ import {
   FacebookFilled,
   MailFilled,
 } from "@ant-design/icons";
+import Slider from "../features/slider";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -127,6 +128,7 @@ const Home = () => {
             style={{ width: "50%" }}
           />
           <Dropdown.Button
+            style={{ backgroundColor: "transparent", color: "red" }}
             overlay={menu}
             placement="bottomCenter"
             icon={<UserOutlined />}
@@ -178,7 +180,7 @@ const Home = () => {
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout style={{ padding: "0 24px 24px" }}>
+        <Layout>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
@@ -187,12 +189,12 @@ const Home = () => {
           <Content
             className="site-layout-background"
             style={{
-              padding: 24,
+              padding: 10,
               margin: 0,
               minHeight: 280,
             }}
           >
-            Content
+            <Slider />
           </Content>
         </Layout>
       </Layout>
