@@ -34,18 +34,18 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
+// const tailFormItemLayout = {
+//   wrapperCol: {
+//     xs: {
+//       span: 24,
+//       offset: 0,
+//     },
+//     sm: {
+//       span: 24,
+//       offset: 0,
+//     },
+//   },
+// };
 
 const onFinish = (values: any) => {
   console.log("Received values of form: ", values);
@@ -142,8 +142,8 @@ const Register = () => {
         />
       </Form.Item>
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+      <Form.Item style={{ justifyContent: "center" }}>
+        <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
           Register
         </Button>
       </Form.Item>
@@ -192,26 +192,31 @@ const Login = () => {
         />
       </Form.Item>
 
-      <Form.Item>
-        <Row>
-          <Col span={12}>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-          </Col>
-        </Row>
+      <Form.Item
+        style={{
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+        <Form.Item>
+          <a className="login-form-forgot" href="">
+            Forgot password?
+          </a>
+        </Form.Item>
       </Form.Item>
 
       <Form.Item style={{ justifyContent: "center" }}>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+          style={{ width: "100%" }}
+        >
           Log in
         </Button>
-        Or <a href="">register now!</a>
       </Form.Item>
     </Form>
   );
@@ -237,6 +242,7 @@ export const LoginForm = () => {
           backgroundColor: "white",
           width: "60vw",
           height: "60vh",
+          padding: 15,
           position: "relative",
         }}
       >
@@ -257,7 +263,7 @@ export const LoginForm = () => {
               width: "95%",
               display: "flex",
               justifyContent: "space-between",
-              margin: "0 auto",
+              margin: "10px auto",
             }}
           >
             <Button
