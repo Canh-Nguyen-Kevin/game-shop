@@ -9,9 +9,9 @@ const Routes = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Home} />
         <Route path="/cart" component={Cart} />
         <Route path="/payment" component={Payment} />
+        <Route path="/" component={Home} />
       </Switch>
     </div>
   );

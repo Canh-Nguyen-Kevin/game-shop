@@ -141,13 +141,13 @@ const AppHeader = () => {
             overlay={<LoginMenu />}
             placement="bottomCenter"
             icon={<UserOutlined />}
-          ></Dropdown.Button>
+          />
           <Badge count={0} showZero>
             <Dropdown.Button
               overlay={ItemsInCart}
               placement="bottomRight"
               icon={<ShoppingCartOutlined />}
-            ></Dropdown.Button>
+            />
           </Badge>
         </div>
       </Header>
