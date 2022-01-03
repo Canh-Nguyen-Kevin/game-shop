@@ -1,24 +1,29 @@
-import React from "react";
-// import firebase from "firebase";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import React, { useEffect, useState } from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBC8cvjQCa51-6K2Gegqga92rWWeHxYHEM",
-  authDomain: "game-shop-501dc.firebaseapp.com",
-  projectId: "game-shop-501dc",
-  storageBucket: "game-shop-501dc.appspot.com",
-  messagingSenderId: "375091939910",
-  appId: "1:375091939910:web:322a03796b20e62fbc5847",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: "redirect",
+  signInSuccessUrl: "/signedIn",
+  // We will display Google and Facebook as auth providers.
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+  ],
+  // callbacks: {
+  //   // Avoid redirects after sign-in.
+  //   signInSuccessWithAuthResult: () => false,
+  // },
+}
 const Auth = () => {
-  return <div>Auth</div>;
+  return (
+    <div>
+      Auth
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    </div>
+  );
 };
 
 export default Auth;

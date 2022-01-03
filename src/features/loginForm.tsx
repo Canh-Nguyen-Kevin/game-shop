@@ -34,18 +34,7 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-// const tailFormItemLayout = {
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//       offset: 0,
-//     },
-//     sm: {
-//       span: 24,
-//       offset: 0,
-//     },
-//   },
-// };
+
 
 const onFinish = (values: any) => {
   console.log("Received values of form: ", values);
