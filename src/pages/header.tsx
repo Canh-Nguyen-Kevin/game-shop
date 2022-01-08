@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Layout, Input, Menu, Breadcrumb, Badge, Avatar } from "antd";
 import { Typography, Space, Dropdown, Button, message, Tooltip } from "antd";
 import "antd/dist/antd.css";
@@ -15,66 +16,136 @@ import {
 } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { showForm, hideForm, formState } from "../features/counter/formSlice";
+import {
+  setActiveUser,
+  setUserLogOut,
+  selectUserName,
+  selectUserEmail,
+} from "../features/counter/userSlice";
+import {
+  getAuth,
+  signOut,
+  // signInWithRedirect,
+  getRedirectResult,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import {
+  auth,
+  // facebookProvider,
+  googleProvider,
+} from "../features/auth/userAuth";
+import { async } from "@firebase/util";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
 const { Search } = Input;
+// const auth = getAuth();
 const onSearch = (value: string) => {
   console.log(value);
 };
 
 const LoginMenu = () => {
   const dispatch = useAppDispatch();
-  function handleMenuClick(e: any) {
-    dispatch(showForm());
-    message.info("Click on menu item.");
-    console.log("click", e);
-  }
+
+  const loginWithGoogle = () => {
+    auth.signInWithRedirect(googleProvider).then((result: any) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // const credential: any = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+      // The signed-in user info.
+      console.log("result", result.user.displayName);
+      dispatch(
+        setActiveUser({
+          userName: result.user.displayName,
+          email: result.user.email,
+        })
+      );
+      // ...
+    });
+    // .catch((err) => alert(err.message));
+  };
+  // const loginWithGoogle = () => {
+  // getRedirectResult(auth)
+  //   .then((result: any) => {
+  //     dispatch(
+  //       setActiveUser({
+  //         userName: result.user.displayName,
+  //         email: result.user.email,
+  //       })
+  //     );
+  //   })
+  //   .catch((err) => alert(err.message));
+  // auth
+  //   .signInWithRedirect(googleProvider)
+  //   .then((result:any) => {
+  //     dispatch(
+  //       setActiveUser({
+  //         userName: result.user.displayName,
+  //         email: result.user.email,
+  //       })
+  //     );
+  //     console.log("user", result.user);
+  //   })
+  //   .catch((error: any) => alert(error.message));
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        return dispatch(setUserLogOut());
+      })
+      .catch((error: any) => alert(error.message));
+  };
   return (
-    <Menu
-      onClick={handleMenuClick}
-      style={{ width: 230, height: "auto", marginTop: 15, borderRadius: 5 }}
-    >
-      <Menu.Item
-        key="1"
-        icon={<UserOutlined />}
-        style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
+    <div>
+      <Menu
+        style={{ width: 230, height: "auto", marginTop: 15, borderRadius: 5 }}
       >
-        Login
-      </Menu.Item>
-      <Menu.Item
-        key="2"
-        icon={<UserOutlined />}
-        style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
-      >
-        Sign up
-      </Menu.Item>
-      <Menu.Item
-        key="3"
-        icon={<FacebookFilled />}
-        style={{
-          margin: 15,
-          borderRadius: 5,
-          backgroundColor: "#096dd9",
-          color: "white",
-        }}
-      >
-        Login with Facebook
-      </Menu.Item>
-      <Menu.Item
-        key="4"
-        icon={<MailFilled />}
-        style={{
-          margin: 15,
-          borderRadius: 5,
-          backgroundColor: "#f5222d",
-          color: "white",
-        }}
-      >
-        Login with Google
-      </Menu.Item>
-    </Menu>
+        <Menu.Item
+          key="1"
+          icon={<UserOutlined />}
+          style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
+          onClick={() => dispatch(showForm())}
+        >
+          Login
+        </Menu.Item>
+        <Menu.Item
+          key="2"
+          icon={<UserOutlined />}
+          style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
+          onClick={() => dispatch(showForm())}
+        >
+          Sign up
+        </Menu.Item>
+
+        <Menu.Item
+          key="3"
+          icon={<FacebookFilled />}
+          style={{
+            margin: 15,
+            borderRadius: 5,
+            backgroundColor: "#096dd9",
+            color: "white",
+          }}
+        >
+          Login with Facebook
+        </Menu.Item>
+        <Menu.Item
+          key="4"
+          icon={<MailFilled />}
+          style={{
+            margin: 15,
+            borderRadius: 5,
+            backgroundColor: "#f5222d",
+            color: "white",
+          }}
+          onClick={loginWithGoogle}
+        >
+          Login with Google
+        </Menu.Item>
+      </Menu>
+    </div>
   );
 };
 const ItemsInCart = (
@@ -91,6 +162,35 @@ const ItemsInCart = (
 );
 
 const AppHeader = () => {
+  const dispatch = useAppDispatch();
+  const userName = useAppSelector(selectUserName);
+
+  console.log("userName is", userName);
+
+  useEffect(() => {
+    const unregisterAuthObserver = getAuth().onAuthStateChanged(
+      async (user) => {
+        if (!user) {
+          console.log("user is not logged in");
+          return;
+        }
+        console.log("login user", user.displayName);
+        const token = await user.getIdToken();
+        console.log("token", token);
+        // setIsSignedIn(!!user);
+      }
+    );
+    return () => unregisterAuthObserver();
+  }, []);
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        return dispatch(setUserLogOut());
+      })
+      .catch((error: any) => alert(error.message));
+  };
   return (
     <div>
       <Header
@@ -136,12 +236,17 @@ const AppHeader = () => {
             enterButton
             style={{ width: "50%" }}
           />
-          <Dropdown.Button
-            style={{ backgroundColor: "transparent", color: "red" }}
-            overlay={<LoginMenu />}
-            placement="bottomCenter"
-            icon={<UserOutlined />}
-          />
+          {userName ? (
+            <button onClick={handleSignOut}>Sign out</button>
+          ) : (
+            <Dropdown.Button
+              style={{ backgroundColor: "transparent", color: "red" }}
+              overlay={<LoginMenu />}
+              placement="bottomCenter"
+              icon={<UserOutlined />}
+            />
+          )}
+
           <Badge count={0} showZero>
             <Dropdown.Button
               overlay={ItemsInCart}

@@ -1,19 +1,19 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Spin, Space } from "antd";
 import AppLayout from "./pages/layout";
+import productApi from "./api/productApi";
 
-const Fallback = () => {
-  return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <Spin size="large" style={{ margin: "auto" }} />
-    </div>
-  );
-};
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={Fallback}>
+      <Suspense
+        fallback={
+          <div>
+            <Spin size="large" style={{ margin: "auto" }} />
+          </div>
+        }
+      >
         <Router>
           <AppLayout />
         </Router>
