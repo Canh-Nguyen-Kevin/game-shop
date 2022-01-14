@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { showForm, hideForm, formState } from "../features/counter/formSlice";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../features/auth/userAuth";
+import Register from "./register";
 import {
   Form,
   Input,
@@ -35,110 +38,10 @@ const formItemLayout = {
   },
 };
 
+// const onFinish = (values: any) => {
+//   console.log("Received values of form: ", values);
+// };
 
-const onFinish = (values: any) => {
-  console.log("Received values of form: ", values);
-};
-
-const Register = () => {
-  return (
-    <Form
-      {...formItemLayout}
-      name="register"
-      onFinish={onFinish}
-      labelAlign="left"
-      scrollToFirstError
-    >
-      <Form.Item
-        name="username"
-        label="User name"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: "Please input your user name!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined />} placeholder="Enter user name" />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
-            required: true,
-            message: "Please input your E-mail!",
-          },
-        ]}
-      >
-        <Input prefix={<MailFilled />} placeholder="Enter email" />
-      </Form.Item>
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[{ required: true, message: "Please input your phone number!" }]}
-      >
-        <Input prefix={<PhoneOutlined />} placeholder="Enter phone number" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password
-          prefix={<LockOutlined />}
-          placeholder="Enter password"
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={["password"]}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: "Please confirm your password!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error("The two passwords that you entered do not match!")
-              );
-            },
-          }),
-        ]}
-      >
-        <Input.Password
-          prefix={<LockOutlined />}
-          placeholder="Confirm password"
-        />
-      </Form.Item>
-
-      <Form.Item style={{ justifyContent: "center" }}>
-        <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-          Register
-        </Button>
-      </Form.Item>
-    </Form>
-  );
-};
 const RegisterDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
@@ -156,7 +59,7 @@ const Login = () => {
       className="login-form"
       labelAlign="left"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      // onFinish={onFinish}
     >
       <Form.Item
         name="username"
@@ -281,7 +184,7 @@ export const LoginForm = () => {
               Sign up
             </Button>
           </div>
-          {isLoginForm ? Login() : Register()}
+          {isLoginForm ? Login() : <Register />}
         </Col>
       </Row>
     </>

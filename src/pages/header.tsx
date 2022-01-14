@@ -1,196 +1,66 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Layout, Input, Menu, Breadcrumb, Badge, Avatar } from "antd";
-import { Typography, Space, Dropdown, Button, message, Tooltip } from "antd";
+import {
+  Typography,
+  Layout,
+  Input,
+  Menu,
+  Badge,
+  Avatar,
+  Dropdown,
+  Button,
+} from "antd";
+
 import "antd/dist/antd.css";
 import meta from "../dataStorage/images/meta.png";
-import {
-  DownOutlined,
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-  ShoppingCartOutlined,
-  FacebookFilled,
-  MailFilled,
-} from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { showForm, hideForm, formState } from "../features/counter/formSlice";
+
 import {
   setActiveUser,
   setUserLogOut,
   selectUserName,
   selectUserEmail,
 } from "../features/counter/userSlice";
-import {
-  getAuth,
-  signOut,
-  // signInWithRedirect,
-  getRedirectResult,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import {
-  auth,
-  // facebookProvider,
-  googleProvider,
-} from "../features/auth/userAuth";
-import { async } from "@firebase/util";
 
-const { SubMenu } = Menu;
+import { auth } from "../features/auth/userAuth";
+import { LoginMenu, UserMenu, ItemsInCart } from "./headerMenu";
+
 const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
 const { Search } = Input;
-// const auth = getAuth();
+
 const onSearch = (value: string) => {
   console.log(value);
 };
 
-const LoginMenu = () => {
-  const dispatch = useAppDispatch();
-
-  const loginWithGoogle = () => {
-    auth.signInWithRedirect(googleProvider).then((result: any) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // const credential: any = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
-      // The signed-in user info.
-      console.log("result", result.user.displayName);
-      dispatch(
-        setActiveUser({
-          userName: result.user.displayName,
-          email: result.user.email,
-        })
-      );
-      // ...
-    });
-    // .catch((err) => alert(err.message));
-  };
-  // const loginWithGoogle = () => {
-  // getRedirectResult(auth)
-  //   .then((result: any) => {
-  //     dispatch(
-  //       setActiveUser({
-  //         userName: result.user.displayName,
-  //         email: result.user.email,
-  //       })
-  //     );
-  //   })
-  //   .catch((err) => alert(err.message));
-  // auth
-  //   .signInWithRedirect(googleProvider)
-  //   .then((result:any) => {
-  //     dispatch(
-  //       setActiveUser({
-  //         userName: result.user.displayName,
-  //         email: result.user.email,
-  //       })
-  //     );
-  //     console.log("user", result.user);
-  //   })
-  //   .catch((error: any) => alert(error.message));
-
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        return dispatch(setUserLogOut());
-      })
-      .catch((error: any) => alert(error.message));
-  };
-  return (
-    <div>
-      <Menu
-        style={{ width: 230, height: "auto", marginTop: 15, borderRadius: 5 }}
-      >
-        <Menu.Item
-          key="1"
-          icon={<UserOutlined />}
-          style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
-          onClick={() => dispatch(showForm())}
-        >
-          Login
-        </Menu.Item>
-        <Menu.Item
-          key="2"
-          icon={<UserOutlined />}
-          style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
-          onClick={() => dispatch(showForm())}
-        >
-          Sign up
-        </Menu.Item>
-
-        <Menu.Item
-          key="3"
-          icon={<FacebookFilled />}
-          style={{
-            margin: 15,
-            borderRadius: 5,
-            backgroundColor: "#096dd9",
-            color: "white",
-          }}
-        >
-          Login with Facebook
-        </Menu.Item>
-        <Menu.Item
-          key="4"
-          icon={<MailFilled />}
-          style={{
-            margin: 15,
-            borderRadius: 5,
-            backgroundColor: "#f5222d",
-            color: "white",
-          }}
-          onClick={loginWithGoogle}
-        >
-          Login with Google
-        </Menu.Item>
-      </Menu>
-    </div>
-  );
-};
-const ItemsInCart = (
-  <Menu style={{ width: 400, height: 250 }}>
-    <Link to="/cart">
-      <Menu.Item key="1" icon={<ShoppingCartOutlined />}>
-        Current Cart
-      </Menu.Item>
-      <Menu.Item key="2" icon={<ShoppingCartOutlined />}>
-        No item in cart
-      </Menu.Item>
-    </Link>
-  </Menu>
-);
-
 const AppHeader = () => {
   const dispatch = useAppDispatch();
   const userName = useAppSelector(selectUserName);
+  const userEmail = useAppSelector(selectUserEmail);
 
   console.log("userName is", userName);
 
   useEffect(() => {
-    const unregisterAuthObserver = getAuth().onAuthStateChanged(
-      async (user) => {
-        if (!user) {
-          console.log("user is not logged in");
-          return;
-        }
-        console.log("login user", user.displayName);
-        const token = await user.getIdToken();
-        console.log("token", token);
-        // setIsSignedIn(!!user);
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(
+          setActiveUser({
+            userName: authUser.displayName,
+            email: authUser.email,
+          })
+        );
+      } else {
+        dispatch(
+          setActiveUser({
+            userName: "",
+            email: "",
+          })
+        );
       }
-    );
-    return () => unregisterAuthObserver();
+    });
   }, []);
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        return dispatch(setUserLogOut());
-      })
-      .catch((error: any) => alert(error.message));
-  };
   return (
     <div>
       <Header
@@ -236,23 +106,21 @@ const AppHeader = () => {
             enterButton
             style={{ width: "50%" }}
           />
+
           {userName ? (
-            <button onClick={handleSignOut}>Sign out</button>
+            <Dropdown.Button overlay={<UserMenu />} placement="bottomCenter">
+              {userName}
+            </Dropdown.Button>
           ) : (
-            <Dropdown.Button
-              style={{ backgroundColor: "transparent", color: "red" }}
-              overlay={<LoginMenu />}
-              placement="bottomCenter"
-              icon={<UserOutlined />}
-            />
+            <Dropdown.Button overlay={<LoginMenu />} placement="bottomCenter">
+              Login
+            </Dropdown.Button>
           )}
 
           <Badge count={0} showZero>
-            <Dropdown.Button
-              overlay={ItemsInCart}
-              placement="bottomRight"
-              icon={<ShoppingCartOutlined />}
-            />
+            <Dropdown.Button overlay={ItemsInCart} placement="bottomRight">
+              Cart
+            </Dropdown.Button>
           </Badge>
         </div>
       </Header>

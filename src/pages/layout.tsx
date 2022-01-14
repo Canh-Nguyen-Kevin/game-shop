@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from "react";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { showForm, hideForm, formState } from "../features/counter/formSlice";
 import { Layout } from "antd";
@@ -15,27 +15,6 @@ import Footer from "./footer";
 import productApi from "../api/productApi";
 
 import { useEffect, useState } from "react";
-// import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-// import firebase from "firebase/compat/app";
-// import "firebase/compat/auth";
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import console from "console";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBC8cvjQCa51-6K2Gegqga92rWWeHxYHEM",
-//   authDomain: "game-shop-501dc.firebaseapp.com",
-//   projectId: "game-shop-501dc",
-//   storageBucket: "game-shop-501dc.appspot.com",
-//   messagingSenderId: "375091939910",
-//   appId: "1:375091939910:web:322a03796b20e62fbc5847",
-// };
-
-// Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
 
 const AppLayout = () => {
   // const [isSignedIn, setIsSignedIn] = useState(false);

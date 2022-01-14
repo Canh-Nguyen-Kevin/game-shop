@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-// import {
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   signOut,
-//   onAuthStateChanged,
-// } from "firebase/auth";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBC8cvjQCa51-6K2Gegqga92rWWeHxYHEM",
@@ -24,4 +22,4 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const googleProvider = new GoogleAuthProvider();
-// export const facebookProvider = new firebase.auth.FacebookAuthProvider();
+export const facebookProvider = new FacebookAuthProvider();
