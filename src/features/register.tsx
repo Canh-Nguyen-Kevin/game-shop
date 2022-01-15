@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { showForm, hideForm, formState } from "../features/counter/formSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -30,10 +30,7 @@ const Register = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = () => {
-    console.log("email", email);
-    console.log("password", password);
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;

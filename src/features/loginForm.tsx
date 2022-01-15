@@ -4,6 +4,7 @@ import { showForm, hideForm, formState } from "../features/counter/formSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../features/auth/userAuth";
 import Register from "./register";
+import Login from "./login";
 import {
   Form,
   Input,
@@ -51,68 +52,7 @@ const RegisterDes = () => {
     </div>
   );
 };
-const Login = () => {
-  return (
-    <Form
-      {...formItemLayout}
-      name="normal_login"
-      className="login-form"
-      labelAlign="left"
-      initialValues={{ remember: true }}
-      // onFinish={onFinish}
-    >
-      <Form.Item
-        name="username"
-        label="User name"
-        rules={[{ required: true, message: "Please input your Username!" }]}
-      >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
-        hasFeedback
-      >
-        <Input.Password
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
 
-      <Form.Item
-        style={{
-          justifyContent: "center",
-          textAlign: "center",
-        }}
-      >
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <a className="login-form-forgot" href="">
-            Forgot password?
-          </a>
-        </Form.Item>
-      </Form.Item>
-
-      <Form.Item style={{ justifyContent: "center" }}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className="login-form-button"
-          style={{ width: "100%" }}
-        >
-          Log in
-        </Button>
-      </Form.Item>
-    </Form>
-  );
-};
 const LoginDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
@@ -184,7 +124,7 @@ export const LoginForm = () => {
               Sign up
             </Button>
           </div>
-          {isLoginForm ? Login() : <Register />}
+          {isLoginForm ? <Login /> : <Register />}
         </Col>
       </Row>
     </>

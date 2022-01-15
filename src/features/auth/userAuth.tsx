@@ -7,6 +7,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   FacebookAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -20,6 +21,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
-export const auth = firebase.auth();
+export const auth = getAuth();
 export const googleProvider = new GoogleAuthProvider();
 export const facebookProvider = new FacebookAuthProvider();
+export const signUp = (email: string, password: string) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+};
