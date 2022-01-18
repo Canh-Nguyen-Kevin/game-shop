@@ -162,9 +162,7 @@ export const UserMenu = () => {
       .catch((error: any) => alert(error.message));
   };
   return (
-    <Menu
-      style={{ width: 230, height: "auto", marginTop: 15, borderRadius: 5 }}
-    >
+    <Menu style={{ width: 230, height: "auto", borderRadius: 5 }}>
       <React.Fragment>
         <Menu.Item key="1" onClick={() => dispatch(showForm())}>
           My profile

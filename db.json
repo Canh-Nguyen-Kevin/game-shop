@@ -1,0 +1,398 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 2,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 3,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 4,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 5,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 6,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 7,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 8,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    }
+  ],
+  "topSelling": [
+    {
+      "id": 1,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 2,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 3,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 4,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 5,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 6,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 7,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 8,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    }
+  ],
+  "games": [
+    {
+      "id": 1,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 2,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 3,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 4,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 5,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 6,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 7,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 8,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    }
+  ],
+  "apps": [
+    {
+      "id": 1,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 2,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 3,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 4,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 5,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 6,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 7,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 8,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    }
+  ],
+  "codes": [
+    {
+      "id": 1,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 2,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 3,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 4,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 5,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 6,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 7,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 8,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    }
+  ],
+  "data": [
+    {
+      "id": 1,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 2,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 3,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 4,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 5,
+      "name": "netflix",
+      "img": "images/NETFLIX1406.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 6,
+      "name": "Spotify",
+      "img": "images/Spotify 1 nam.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 7,
+      "name": "Nitro",
+      "img": "images/nitro.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    },
+    {
+      "id": 8,
+      "name": "Grammarly",
+      "img": "images/grammarly.png",
+      "description": "Tài khoản Netflix Premium for 1 User (1 Tháng)",
+      "price": "79.000đ",
+      "discount": "-70%"
+    }
+  ]
+}

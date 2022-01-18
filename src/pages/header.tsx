@@ -1,6 +1,5 @@
-import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Layout,
@@ -11,6 +10,9 @@ import {
   Dropdown,
   Button,
 } from "antd";
+import { Row, Col, Divider } from "antd";
+
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import meta from "../dataStorage/images/meta.png";
@@ -25,8 +27,8 @@ import {
 
 import { auth } from "../features/auth/userAuth";
 import { LoginMenu, UserMenu, ItemsInCart } from "./headerMenu";
+import MobileMenu from "../components/mobileMenu";
 
-const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
 const { Search } = Input;
 
@@ -62,69 +64,115 @@ const AppHeader = () => {
   }, []);
 
   return (
-    <div>
-      <Header
-        className="header"
-        style={{
-          height: 80,
-        }}
+    <Row
+      gutter={16}
+      align="middle"
+      justify="center"
+      style={{ height: 100, width: "100%", backgroundColor: "#002766" }}
+    >
+      <Col
+        className="gutter-row"
+        lg={{ span: 0 }}
+        md={{ span: 0 }}
+        sm={{ span: 4 }}
+        xs={{ span: 4 }}
       >
-        <div
-          className="container"
-          style={{
-            width: "80%",
-            height: 80,
-            padding: 0,
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Link to="/">
-            <div
-              className="logo"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
+        <MobileMenu />
+      </Col>
+      <Col
+        className="gutter-row"
+        lg={{ span: 4 }}
+        md={{ span: 0 }}
+        sm={{ span: 0 }}
+        xs={{ span: 0 }}
+      >
+        <Link to="/">
+          <div
+            className="logo"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={meta}
+              alt="Logo"
+              style={{ width: 50, height: 50, borderRadius: 5 }}
+            />
+            <Title
+              style={{ color: "red", marginLeft: 10, textAlign: "center" }}
+              level={3}
             >
-              <img
-                src={meta}
-                alt="Logo"
-                style={{ width: 40, height: 40, borderRadius: 5 }}
-              />
-              <Title style={{ color: "red", marginLeft: 10 }} level={3}>
-                META GAMING
-              </Title>
-            </div>
-          </Link>
-          <Search
-            placeholder="input search text"
-            onSearch={onSearch}
-            enterButton
-            style={{ width: "50%" }}
-          />
-
-          {userName ? (
-            <Dropdown.Button overlay={<UserMenu />} placement="bottomCenter">
-              {userName}
-            </Dropdown.Button>
-          ) : (
-            <Dropdown.Button overlay={<LoginMenu />} placement="bottomCenter">
-              Login
-            </Dropdown.Button>
-          )}
-
-          <Badge count={0} showZero>
-            <Dropdown.Button overlay={ItemsInCart} placement="bottomRight">
-              Cart
-            </Dropdown.Button>
-          </Badge>
-        </div>
-      </Header>
-    </div>
+              META GAMING
+            </Title>
+          </div>
+        </Link>
+      </Col>
+      <Col
+        className="gutter-row"
+        lg={{ span: 10 }}
+        md={{ span: 14 }}
+        sm={{ span: 18 }}
+        xs={{ span: 18 }}
+      >
+        <Search
+          placeholder="input search text"
+          onSearch={onSearch}
+          enterButton
+          style={{ width: "100%" }}
+        />
+      </Col>
+      <Col
+        className="gutter-row"
+        lg={{ span: 4, offset: 1 }}
+        md={{ span: 5 }}
+        sm={{ span: 0 }}
+        xs={{ span: 0 }}
+      >
+        {userName ? (
+          <Dropdown overlay={<UserMenu />} placement="bottomCenter" arrow>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+              style={{ fontSize: 15, color: "white" }}
+            >
+              <UserOutlined style={{ fontSize: 30 }} /> {userName}
+            </a>
+          </Dropdown>
+        ) : (
+          <Dropdown overlay={<LoginMenu />} placement="bottomCenter" arrow>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+              style={{ fontSize: 15, color: "white" }}
+            >
+              <UserOutlined style={{ fontSize: 30 }} /> Login/Register
+            </a>
+          </Dropdown>
+        )}
+      </Col>
+      <Col
+        className="gutter-row"
+        lg={{ span: 1 }}
+        md={{ span: 2 }}
+        sm={{ span: 0 }}
+        xs={{ span: 0 }}
+      >
+        <Badge count={0} showZero>
+          <Dropdown overlay={ItemsInCart} placement="bottomRight" arrow>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+              style={{ fontSize: 15, color: "white" }}
+            >
+              <ShoppingCartOutlined style={{ fontSize: 40 }} />
+            </a>
+          </Dropdown>
+        </Badge>
+      </Col>
+    </Row>
   );
 };
 

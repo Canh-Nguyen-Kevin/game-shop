@@ -31,7 +31,7 @@ const getFirebaseToken = async () => {
   });
 };
 const axiosClient = axios.create({
-  baseURL: "https://js-post-api.herokuapp.com/api",
+  baseURL: "http://localhost:3000",
   headers: {
     "content-type": "application/json",
   },
