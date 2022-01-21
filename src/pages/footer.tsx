@@ -1,7 +1,95 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  Typography,
+  Layout,
+  Input,
+  Menu,
+  Badge,
+  Avatar,
+  Dropdown,
+  Button,
+} from "antd";
+import { Row, Col, Divider, Card } from "antd";
+
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <>
+      <Row
+        gutter={16}
+        align="middle"
+        justify="center"
+        style={{ marginTop: 50 }}
+      >
+        <Col
+          className="gutter-row"
+          lg={{ span: 5 }}
+          md={{ span: 5 }}
+          sm={{ span: 11 }}
+          xs={{ span: 22 }}
+        >
+          <Card
+            title="Customers support"
+            bordered={false}
+            style={{ width: "100%" }}
+          >
+            <p>Card content</p>
+            <p>Card content</p>
+            <p>Card content</p>
+          </Card>
+        </Col>
+        <Col
+          className="gutter-row"
+          lg={{ span: 5 }}
+          md={{ span: 5 }}
+          sm={{ span: 11 }}
+          xs={{ span: 22 }}
+        >
+          <Card
+            title="About Meta Gaming"
+            bordered={false}
+            style={{ width: "100%" }}
+          >
+            <p>Card content</p>
+            <p>Card content</p>
+            <p>Card content</p>
+          </Card>
+        </Col>
+        <Col
+          className="gutter-row"
+          lg={{ span: 5 }}
+          md={{ span: 5 }}
+          sm={{ span: 11 }}
+          xs={{ span: 22 }}
+        >
+          <Card
+            title="Payment method"
+            bordered={false}
+            style={{ width: "100%" }}
+          >
+            <p>Card content</p>
+            <p>Card content</p>
+            <p>Card content</p>
+          </Card>
+        </Col>
+        <Col
+          className="gutter-row"
+          lg={{ span: 5 }}
+          md={{ span: 5 }}
+          sm={{ span: 11 }}
+          xs={{ span: 22 }}
+        >
+          <Card title="Contact us" bordered={false} style={{ width: "100%" }}>
+            <p>Card content</p>
+            <p>Card content</p>
+            <p>Card content</p>
+          </Card>
+        </Col>
+      </Row>
+    </>
+  );
 };
 
 export default Footer;
