@@ -22,9 +22,9 @@ const AppLayout = () => {
         {stateOfForm ? <LoginForm /> : null}
       </div>
       <div style={{ opacity: stateOfForm ? 0.5 : 1 }}>
-        {/* <Affix offsetTop={0}> */}
-        <AppHeader />
-        {/* </Affix> */}
+        <Affix offsetTop={0}>
+          <AppHeader />
+        </Affix>
         <BackTop>
           <UpCircleFilled style={{ fontSize: 40 }} />
         </BackTop>

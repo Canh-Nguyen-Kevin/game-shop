@@ -16,6 +16,11 @@ import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import meta from "../dataStorage/images/meta.png";
+import {
+  addCartItem,
+  removeCartItem,
+  currentCart,
+} from "../features/counter/cartSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 import {
@@ -40,8 +45,13 @@ const AppHeader = () => {
   const dispatch = useAppDispatch();
   const userName = useAppSelector(selectUserName);
   const userEmail = useAppSelector(selectUserEmail);
+  const products = useAppSelector(currentCart);
 
-  console.log("userName is", userName);
+  const productQuantity = products.reduce(
+    (sum, product) => sum + product.qty,
+    0
+  );
+  console.log("quantity", productQuantity);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -68,7 +78,12 @@ const AppHeader = () => {
       gutter={16}
       align="middle"
       justify="center"
-      style={{ height: 100, width: "100%", backgroundColor: "#002766" }}
+      style={{
+        height: 100,
+        width: "100%",
+        backgroundColor: "#002766",
+        marginBottom: 30,
+      }}
     >
       <Col
         className="gutter-row"
@@ -153,6 +168,7 @@ const AppHeader = () => {
           </Dropdown>
         )}
       </Col>
+
       <Col
         className="gutter-row"
         lg={{ span: 1 }}
@@ -160,17 +176,23 @@ const AppHeader = () => {
         sm={{ span: 0 }}
         xs={{ span: 0 }}
       >
-        <Badge count={0} showZero>
-          <Dropdown overlay={ItemsInCart} placement="bottomRight" arrow>
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-              style={{ fontSize: 15, color: "white" }}
-            >
-              <ShoppingCartOutlined style={{ fontSize: 40 }} />
-            </a>
-          </Dropdown>
-        </Badge>
+        <Link to="/cart">
+          <Badge count={productQuantity} showZero>
+            <Dropdown overlay={<ItemsInCart />} placement="bottomRight" arrow>
+              <a
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+                style={{ fontSize: 15, color: "white" }}
+              >
+                <Link to="/cart">
+                  <ShoppingCartOutlined
+                    style={{ fontSize: 40, color: "white" }}
+                  />
+                </Link>
+              </a>
+            </Dropdown>
+          </Badge>
+        </Link>
       </Col>
     </Row>
   );

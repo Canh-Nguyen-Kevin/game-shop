@@ -16,16 +16,14 @@ const menu = (
 );
 const MobileMenu = () => {
   const [fold, setFold] = useState(false);
-  const toggleFold = () => {
-    setFold((fold) => !fold);
-  };
+
   return (
     <Dropdown overlay={menu} trigger={["click"]} arrow>
       <a
         className="ant-dropdown-link"
         onClick={(e) => {
           e.preventDefault();
-          toggleFold();
+          setFold(!fold);
         }}
       >
         {fold ? (

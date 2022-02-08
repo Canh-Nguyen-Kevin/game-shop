@@ -1,30 +1,24 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import {
-  Typography,
-  Layout,
-  Input,
-  Menu,
-  Badge,
-  Avatar,
-  Dropdown,
-  Button,
-} from "antd";
+
+import { Menu, Image, Button } from "antd";
 
 import "antd/dist/antd.css";
-import meta from "../dataStorage/images/meta.png";
+
 import {
-  DownOutlined,
   UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
   ShoppingCartOutlined,
   FacebookFilled,
   MailFilled,
 } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { showForm, hideForm, formState } from "../features/counter/formSlice";
+import {
+  addCartItem,
+  removeCartItem,
+  currentCart,
+} from "../features/counter/cartSlice";
+
 import {
   setActiveUser,
   setUserLogOut,
@@ -177,17 +171,52 @@ export const UserMenu = () => {
     </Menu>
   );
 };
-export const ItemsInCart = (
-  <Menu style={{ width: 400, height: 250 }}>
-    <Link to="/cart">
-      <React.Fragment>
-        <Menu.Item key="1" icon={<ShoppingCartOutlined />}>
-          Current Cart
-        </Menu.Item>
-        <Menu.Item key="2" icon={<ShoppingCartOutlined />}>
-          No item in cart
-        </Menu.Item>
-      </React.Fragment>
-    </Link>
-  </Menu>
-);
+export const ItemsInCart = () => {
+  const products = useAppSelector(currentCart);
+  return (
+    <>
+      {products.length ? (
+        <Menu
+          style={{
+            width: 400,
+            padding: 10,
+            borderRadius: 5,
+            border: "1px solid gray",
+          }}
+        >
+          {products.map((product) => {
+            return (
+              <>
+                <Menu.Item key={product.id}>
+                  <Image
+                    width={30}
+                    src={`/${product.img[0]}`}
+                    alt={product.name}
+                  />
+                  <span>{product.description}</span>
+                  <span style={{ color: "red" }}>{product.price}</span>
+                </Menu.Item>
+              </>
+            );
+          })}
+          <Button type="primary" danger style={{ marginLeft: 290 }}>
+            View Cart
+          </Button>
+        </Menu>
+      ) : (
+        <Menu style={{ width: 400, height: 250 }}>
+          <Link to="/cart">
+            <React.Fragment>
+              <Menu.Item key="1" icon={<ShoppingCartOutlined />}>
+                Current Cart
+              </Menu.Item>
+              <Menu.Item key="2" icon={<ShoppingCartOutlined />}>
+                No item in cart
+              </Menu.Item>
+            </React.Fragment>
+          </Link>
+        </Menu>
+      )}
+    </>
+  );
+};

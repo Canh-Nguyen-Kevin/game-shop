@@ -8,7 +8,7 @@ export interface CounterState {
 }
 
 const initialState: CounterState = {
-  value: 0,
+  value: 1,
   status: "idle",
 };
 
@@ -31,6 +31,9 @@ export const counterSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
+    resetCount: (state) => {
+      state.value = 1;
+    },
     increment: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
@@ -39,11 +42,11 @@ export const counterSlice = createSlice({
       state.value += 1;
     },
     decrement: (state) => {
-      state.value -= 1;
+      if (state.value > 1) state.value -= 1;
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+      state.value = action.payload;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -60,7 +63,8 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { resetCount, increment, decrement, incrementByAmount } =
+  counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
