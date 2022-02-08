@@ -1,32 +1,12 @@
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { showForm, hideForm, formState } from "../features/counter/formSlice";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../features/auth/userAuth";
+
 import Register from "./register";
 import Login from "./login";
-import {
-  Form,
-  Input,
-  InputNumber,
-  Card,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete,
-} from "antd";
+import { Card, Row, Col, Button } from "antd";
 
-import {
-  DownOutlined,
-  UserOutlined,
-  PhoneOutlined,
-  LockOutlined,
-  CloseCircleFilled,
-  FacebookFilled,
-  MailFilled,
-} from "@ant-design/icons";
+import { UserOutlined, CloseCircleFilled } from "@ant-design/icons";
 
 const formItemLayout = {
   labelCol: {
@@ -39,15 +19,11 @@ const formItemLayout = {
   },
 };
 
-// const onFinish = (values: any) => {
-//   console.log("Received values of form: ", values);
-// };
-
 const RegisterDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
       <Card title="Register" bordered={false}>
-        <img src="images/bird.png" alt="image" />
+        <img src="/images/bird.png" alt="image" />
       </Card>
     </div>
   );
@@ -57,7 +33,7 @@ const LoginDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
       <Card title="Login" bordered={false}>
-        <img src="images/person.png" alt="image" />
+        <img src="/images/person.png" alt="image" />
       </Card>
     </div>
   );

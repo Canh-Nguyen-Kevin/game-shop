@@ -8,9 +8,10 @@ import {
   FileUnknownOutlined,
 } from "@ant-design/icons";
 import { selectUserName } from "../features/counter/userSlice";
+
+import { showForm, hideForm } from "../features/counter/formSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import SimilarProduct from "./similarProduct";
-import { current } from "@reduxjs/toolkit";
 
 const { TextArea } = Input;
 export interface commentsArr {
@@ -26,8 +27,14 @@ const CommentDetail = ({ item }: any) => {
   const [page, setPage] = useState(1);
   const [commentsArr, setCommentsArr] = useState<commentsArr[]>([]);
   const userName = useAppSelector(selectUserName);
+  const dispatch = useAppDispatch();
 
   const handleComment = () => {
+    if (!userName) {
+      alert("please login to use this function");
+      dispatch(showForm());
+      return;
+    }
     if (userName && comment) {
       commentsArr.unshift({
         name: userName,

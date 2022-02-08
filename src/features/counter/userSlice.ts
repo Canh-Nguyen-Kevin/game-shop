@@ -12,7 +12,7 @@ const userSlice = createSlice({
   reducers: {
     setActiveUser: (state, action) => {
       state.userName = action.payload.userName;
-      state.userEmail = action.payload.userEmail;
+      state.userEmail = action.payload.email;
     },
     setUserLogOut: (state) => {
       state.userName = "";

@@ -13,6 +13,8 @@ import {
   incrementByAmount,
   selectCount,
 } from "../features/counter/counterSlice";
+import { selectUserEmail } from "../features/counter/userSlice";
+import { showForm, hideForm } from "../features/counter/formSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 const openNotification = (
@@ -32,22 +34,28 @@ const DescriptionDetail = ({ item }: any) => {
 
   const dispatch = useAppDispatch();
   const quantity: number = useAppSelector(selectCount);
+  const userEmail = useAppSelector(selectUserEmail);
   const { id, type, name, img, description, price, discount } = item;
 
   const addProductToCart = () => {
-    dispatch(
-      addCartItem({
-        ...item,
-        price: pricing,
-        discount: discounting,
-        qty: quantity,
-      })
-    );
-    openNotification(
-      "topRight",
-      "Success",
-      "The product has been added to cart"
-    );
+    if (userEmail) {
+      dispatch(
+        addCartItem({
+          ...item,
+          price: pricing,
+          discount: discounting,
+          qty: quantity,
+        })
+      );
+      openNotification(
+        "topRight",
+        "Success",
+        "The product has been added to cart"
+      );
+    } else {
+      dispatch(showForm());
+      alert("please login to use this function");
+    }
   };
   return (
     <div>
