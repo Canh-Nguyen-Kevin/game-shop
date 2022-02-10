@@ -52,6 +52,7 @@ const AppHeader = () => {
     0
   );
   console.log("quantity", productQuantity);
+  console.log(typeof productQuantity);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {

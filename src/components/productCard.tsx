@@ -8,7 +8,7 @@ const ProductCard = ({ product }: any) => {
   const dispatch = useAppDispatch();
   return (
     <Link to={`/products/${id}`}>
-      <div key={id} onClick={() => dispatch(resetCount())}>
+      <div onClick={() => dispatch(resetCount())}>
         <img
           src={`/${img[0]}`}
           alt="image"

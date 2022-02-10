@@ -11,7 +11,9 @@ export interface product {
   information: string;
   price: number;
   discount: number;
+  duration: number | string;
   qty: number;
+  check: boolean;
 }
 
 export interface state {
@@ -32,15 +34,23 @@ const CartSlice = createSlice({
     addCartItem: (state, action: PayloadAction<any>) => {
       let alreadyAdded = true;
       const inCartProduct = state.products.find(
-        (product) => product.id === action.payload.id
+        (product) =>
+          `${product.id} + ${product.duration}` ===
+          `${action.payload.id} + ${action.payload.duration}`
       );
 
       if (inCartProduct) {
-        state.products.forEach((product: product) =>
-          product.id === action.payload.id
-            ? (product.qty += action.payload.qty)
-            : null
-        );
+        state.products.forEach((product: product) => {
+          if (
+            `${product.id} + ${product.duration}` ===
+            `${action.payload.id} + ${action.payload.duration}`
+          ) {
+            product.qty += action.payload.qty;
+            product.check
+              ? (product.check = product.check)
+              : (product.check = action.payload.check);
+          }
+        });
       } else {
         alreadyAdded = false;
       }
@@ -51,13 +61,35 @@ const CartSlice = createSlice({
     },
     removeCartItem: (state, action: PayloadAction<any>) => {
       state.products = state.products.filter(
-        (product: product) => product.id !== action.payload.id
+        (product: product) =>
+          `${product.id} + ${product.duration}` !==
+          `${action.payload.id} + ${action.payload.duration}`
       );
+    },
+    adjustQty: (state, action: PayloadAction<any>) => {
+      state.products.map((product) => {
+        if (
+          `${product.id} + ${product.duration}` ===
+          `${action.payload.id} + ${action.payload.duration}`
+        )
+          return (product.qty = action.payload.qty);
+        return product;
+      });
+    },
+    checkProduct: (state, action: PayloadAction<any>) => {
+      state.products.map((product) => {
+        if (
+          `${product.id} + ${product.duration}` ===
+          `${action.payload.id} + ${action.payload.duration}`
+        )
+          return (product.check = action.payload.check);
+      });
     },
   },
 });
 
-export const { addCartItem, removeCartItem } = CartSlice.actions;
+export const { addCartItem, removeCartItem, adjustQty, checkProduct } =
+  CartSlice.actions;
 export const currentCart = (state: RootState) => state.cart.products;
 
 export default CartSlice.reducer;

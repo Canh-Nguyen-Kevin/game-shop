@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Rate, Input, notification } from "antd";
 import {
   CheckCircleFilled,
@@ -28,9 +29,11 @@ const openNotification = (
     icon: <CheckCircleFilled style={{ color: "#108ee9" }} />,
   });
 };
+
 const DescriptionDetail = ({ item }: any) => {
   const [pricing, setPricing] = useState<number>();
   const [discounting, setDiscounting] = useState<number>();
+  const [duration, setDuration] = useState<number | string>();
 
   const dispatch = useAppDispatch();
   const quantity: number = useAppSelector(selectCount);
@@ -39,18 +42,48 @@ const DescriptionDetail = ({ item }: any) => {
 
   const addProductToCart = () => {
     if (userEmail) {
+      if (!duration) {
+        alert("please choose product's duration");
+        return;
+      }
+
       dispatch(
         addCartItem({
           ...item,
           price: pricing,
           discount: discounting,
+          duration: duration,
           qty: quantity,
+          check: false,
         })
       );
       openNotification(
         "topRight",
         "Success",
         "The product has been added to cart"
+      );
+    } else {
+      dispatch(showForm());
+      alert("please login to use this function");
+    }
+  };
+
+  const buyNow = () => {
+    if (userEmail) {
+      if (!duration) {
+        alert("please choose product's duration");
+
+        return;
+      }
+      dispatch(
+        addCartItem({
+          ...item,
+          price: pricing,
+          discount: discounting,
+          duration: duration,
+          qty: quantity,
+          check: true,
+        })
       );
     } else {
       dispatch(showForm());
@@ -85,6 +118,7 @@ const DescriptionDetail = ({ item }: any) => {
             border: "1px solid #1890ff",
           }}
           value={quantity}
+          onChange={(e) => e.target.value}
           min={0}
         />
         <Button type="primary" ghost onClick={() => dispatch(increment())}>
@@ -104,6 +138,7 @@ const DescriptionDetail = ({ item }: any) => {
           onClick={() => {
             setPricing(price);
             setDiscounting(discount);
+            setDuration("1 month");
           }}
         >
           1 month
@@ -115,6 +150,7 @@ const DescriptionDetail = ({ item }: any) => {
           onClick={() => {
             setPricing(price * 2);
             setDiscounting(discount / 2);
+            setDuration("6 months");
           }}
         >
           6 months
@@ -127,6 +163,7 @@ const DescriptionDetail = ({ item }: any) => {
           onClick={() => {
             setPricing(price * 3);
             setDiscounting(discount / 2);
+            setDuration("1 year");
           }}
         >
           1 year
@@ -138,6 +175,7 @@ const DescriptionDetail = ({ item }: any) => {
           onClick={() => {
             setPricing(price * 5);
             setDiscounting(discount / 2);
+            setDuration("Life time");
           }}
         >
           Life time
@@ -154,14 +192,17 @@ const DescriptionDetail = ({ item }: any) => {
         >
           Add to cart
         </Button>
-        <Button
-          type="primary"
-          size="large"
-          icon={<DollarOutlined />}
-          style={{ width: 170, fontSize: "1.1rem" }}
-        >
-          Buy now
-        </Button>
+        <Link to={!duration ? `/products/${id}` : "/cart"}>
+          <Button
+            type="primary"
+            size="large"
+            icon={<DollarOutlined />}
+            onClick={buyNow}
+            style={{ width: 170, fontSize: "1.1rem" }}
+          >
+            Buy now
+          </Button>
+        </Link>
       </div>
     </div>
   );

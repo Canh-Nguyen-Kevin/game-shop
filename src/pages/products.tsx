@@ -50,7 +50,7 @@ const Products = () => {
                 sm={{ span: 11 }}
                 xs={{ span: 22 }}
               >
-                <ProductCard product={product} link={"entertainment"} />
+                <ProductCard product={product} key={product.id} />
               </Col>
             );
           })}
@@ -84,11 +84,7 @@ const Products = () => {
                 sm={{ span: 11 }}
                 xs={{ span: 22 }}
               >
-                <ProductCard
-                  product={product}
-                  link={"topSelling"}
-                  key={product.id}
-                />
+                <ProductCard product={product} key={product.id} />
               </Col>
             );
           })}
@@ -122,7 +118,7 @@ const Products = () => {
                 sm={{ span: 11 }}
                 xs={{ span: 22 }}
               >
-                <ProductCard product={product} link={"games"} />
+                <ProductCard product={product} key={product.id} />
               </Col>
             );
           })}
@@ -156,7 +152,7 @@ const Products = () => {
                 sm={{ span: 11 }}
                 xs={{ span: 22 }}
               >
-                <ProductCard product={product} link={"apps"} />
+                <ProductCard product={product} key={product.id} />
               </Col>
             );
           })}
@@ -190,11 +186,7 @@ const Products = () => {
                 sm={{ span: 11 }}
                 xs={{ span: 22 }}
               >
-                <ProductCard
-                  product={product}
-                  link={"codes"}
-                  key={product.id}
-                />
+                <ProductCard product={product} key={product.id} />
               </Col>
             );
           })}
@@ -228,7 +220,7 @@ const Products = () => {
                 sm={{ span: 11 }}
                 xs={{ span: 22 }}
               >
-                <ProductCard product={product} link={"data"} />
+                <ProductCard product={product} key={product.id} />
               </Col>
             );
           })}
