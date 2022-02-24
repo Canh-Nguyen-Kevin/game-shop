@@ -1,6 +1,17 @@
 import React, { useState, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { showForm, hideForm, formState } from "../features/counter/formSlice";
+import {
+  showForm,
+  showLoginForm,
+  formState,
+} from "../features/counter/formSlice";
+import {
+  createUser,
+  setActiveUser,
+  setUserLogOut,
+  selectUserName,
+  selectUserEmail,
+} from "../features/counter/userSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../features/auth/userAuth";
 import { Form, Input, Button, AutoComplete } from "antd";
@@ -11,6 +22,7 @@ import {
   PhoneOutlined,
   LockOutlined,
   MailFilled,
+  FacebookFilled,
 } from "@ant-design/icons";
 
 const formItemLayout = {
@@ -24,18 +36,28 @@ const formItemLayout = {
   },
 };
 
-const Register = () => {
+const Register = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+    dispatch(createUser(values));
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
   const handleSubmit = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        dispatch(showLoginForm(true));
         console.log("register", user);
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -48,35 +70,23 @@ const Register = () => {
     <Form
       {...formItemLayout}
       name="register"
-      onFinish={handleSubmit}
+      onFinish={(values) => {
+        onFinish(values);
+        handleSubmit();
+      }}
       labelAlign="left"
       scrollToFirstError
     >
-      <Form.Item
-        name="username"
-        label="User name"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: "Please input your user name!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined />} placeholder="Enter user name" />
-      </Form.Item>
       <Form.Item
         name="email"
         label="E-mail"
         rules={[
           {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
             required: true,
-            message: "Please input your E-mail!",
+            pattern: new RegExp(
+              "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$"
+            ),
+            message: "Please input a valid E-mail address!",
           },
         ]}
       >
@@ -90,7 +100,15 @@ const Register = () => {
       <Form.Item
         name="phone"
         label="Phone Number"
-        rules={[{ required: true, message: "Please input your phone number!" }]}
+        rules={[
+          {
+            required: true,
+            pattern: new RegExp(
+              /^[+84|84|0]+(3|5|7|8|9|1[2|6|8|9])+([0-9]{8})\b/g
+            ),
+            message: "Please input your valid phone number!",
+          },
+        ]}
       >
         <Input prefix={<PhoneOutlined />} placeholder="Enter phone number" />
       </Form.Item>
@@ -100,7 +118,11 @@ const Register = () => {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            pattern: new RegExp(
+              /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+            ),
+            message:
+              "Password at least 8 characters, including number, uppercase and lowercase ",
           },
         ]}
         hasFeedback
@@ -141,14 +163,42 @@ const Register = () => {
         />
       </Form.Item>
 
-      <Form.Item style={{ justifyContent: "center" }}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ width: "100%" }}
-          //   onClick={handleSubmit}
-        >
+      <div>
+        <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
           Register
+        </Button>
+      </div>
+      <p style={{ textAlign: "center" }}>
+        <u>OR LOGIN WITH</u>
+      </p>
+      <div className="flex">
+        <Button
+          ghost
+          type="primary"
+          icon={<FacebookFilled />}
+          onClick={props.loginWithFacebook}
+        >
+          Facebook
+        </Button>
+        <Button
+          ghost
+          danger
+          icon={<MailFilled />}
+          onClick={() => props.loginWithGoogle()}
+        >
+          Google
+        </Button>
+      </div>
+      <Form.Item style={{ justifyContent: "center" }}>
+        Already have an account?
+        <Button
+          type="text"
+          danger
+          onClick={() => {
+            dispatch(showLoginForm(true));
+          }}
+        >
+          <strong>Login</strong>
         </Button>
       </Form.Item>
     </Form>

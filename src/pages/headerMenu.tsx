@@ -12,11 +12,12 @@ import {
   MailFilled,
 } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { showForm, hideForm, formState } from "../features/counter/formSlice";
+import { showForm, formState } from "../features/counter/formSlice";
 import {
   addCartItem,
   removeCartItem,
   currentCart,
+  resetCart,
 } from "../features/counter/cartSlice";
 
 import {
@@ -101,7 +102,7 @@ export const LoginMenu = () => {
           key="1"
           icon={<UserOutlined />}
           style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
-          onClick={() => dispatch(showForm())}
+          onClick={() => dispatch(showForm(true))}
         >
           Login
         </Menu.Item>
@@ -109,9 +110,9 @@ export const LoginMenu = () => {
           key="2"
           icon={<UserOutlined />}
           style={{ margin: 15, borderRadius: 5, backgroundColor: "#fa8c16" }}
-          onClick={() => dispatch(showForm())}
+          onClick={() => dispatch(showForm(true))}
         >
-          Sign up
+          Register
         </Menu.Item>
 
         <Menu.Item
@@ -151,17 +152,18 @@ export const UserMenu = () => {
     auth
       .signOut()
       .then(() => {
-        return dispatch(setUserLogOut());
+        dispatch(setUserLogOut());
+        dispatch(resetCart());
       })
       .catch((error: any) => alert(error.message));
   };
   return (
     <Menu style={{ width: 230, height: "auto", borderRadius: 5 }}>
       <React.Fragment>
-        <Menu.Item key="1" onClick={() => dispatch(showForm())}>
+        <Menu.Item key="1" onClick={() => console.log("User profile")}>
           My profile
         </Menu.Item>
-        <Menu.Item key="2" onClick={() => dispatch(showForm())}>
+        <Menu.Item key="2" onClick={() => console.log("Purchase history")}>
           Purchase history
         </Menu.Item>
         <Menu.Item key="3" onClick={handleSignOut}>

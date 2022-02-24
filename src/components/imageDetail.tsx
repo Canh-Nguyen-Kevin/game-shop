@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { Image } from "antd";
+
+import {
+  FacebookOutlined,
+  ShoppingCartOutlined,
+  DollarOutlined,
+  SendOutlined,
+} from "@ant-design/icons";
 const ImageDetail = ({ item }: any) => {
   const [index, setIndex] = useState(0);
 
   return (
     <>
-      <div style={{ height: 240 }}>
+      <div style={{ marginBottom: 20 }}>
         <Image
           src={`/${item.img[index]}`}
           alt={item.name}
@@ -29,8 +36,7 @@ const ImageDetail = ({ item }: any) => {
               alt={"images"}
               key={index}
               style={{
-                width: 70,
-                height: 40,
+                width: "23%",
                 display: "block",
                 borderRadius: 5,
                 objectFit: "fill",

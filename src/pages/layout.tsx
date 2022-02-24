@@ -1,16 +1,17 @@
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { showForm, hideForm, formState } from "../features/counter/formSlice";
+import { showForm, formState } from "../features/counter/formSlice";
 import { Layout, Affix, BackTop } from "antd";
 import { UpCircleFilled, MessageTwoTone } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import "./home.scss";
 
-import { LoginForm } from "../features/loginForm";
+import { LoginForm } from "../components/loginForm";
 import AppHeader from "./header";
 import Routes from "../routes/routes";
 import Footer from "./footer";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 const AppLayout = () => {
   const stateOfForm = useAppSelector(formState);
@@ -21,7 +22,8 @@ const AppLayout = () => {
       <div className="form" onClick={(e) => e.stopPropagation()}>
         {stateOfForm ? <LoginForm /> : null}
       </div>
-      <div style={{ opacity: stateOfForm ? 0.5 : 1 }}>
+
+      <div style={{ opacity: stateOfForm ? 0.1 : 1 }}>
         <Affix offsetTop={0}>
           <AppHeader />
         </Affix>

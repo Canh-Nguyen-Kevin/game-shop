@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 const Home = React.lazy(() => import("../pages/home"));
 const Cart = React.lazy(() => import("../pages/cart"));

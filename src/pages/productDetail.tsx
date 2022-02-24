@@ -39,40 +39,32 @@ const ProductDetail = () => {
   }, [productId]);
 
   return (
-    <div className="detail-container">
-      <Row
-        gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
-        justify="center"
-        style={{ margin: 0, padding: 0 }}
-      >
-        <Col
-          className="gutter-row"
-          lg={{ span: 8 }}
-          md={{ span: 8 }}
-          sm={{ span: 10 }}
-          xs={{ span: 22 }}
-        >
-          <ImageDetail item={item} />
-        </Col>
-        <Col
-          className="gutter-row"
-          lg={{ span: 12 }}
-          md={{ span: 12 }}
-          sm={{ span: 12 }}
-          xs={{ span: 22 }}
-        >
-          <DescriptionDetail item={item} />
-        </Col>
-        <Col
-          className="gutter-row"
-          lg={{ span: 0 }}
-          md={{ span: 0 }}
-          sm={{ span: 0 }}
-          xs={{ span: 0 }}
-        ></Col>
-      </Row>
+    <>
+      <div className="products-container">
+        <Row justify="space-between" className="cartItem">
+          <Col
+            className="gutter-row"
+            lg={{ span: 10 }}
+            md={{ span: 10 }}
+            sm={{ span: 24 }}
+            xs={{ span: 24 }}
+          >
+            <ImageDetail item={item} />
+          </Col>
+          <Col
+            className="gutter-row"
+            lg={{ span: 13 }}
+            md={{ span: 13 }}
+            sm={{ span: 24 }}
+            xs={{ span: 24 }}
+          >
+            <DescriptionDetail item={item} />
+          </Col>
+        </Row>
+      </div>
+
       <CommentDetail item={item} />
-    </div>
+    </>
   );
 };
 

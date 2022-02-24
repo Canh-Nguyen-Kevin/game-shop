@@ -33,53 +33,83 @@ const CartItem = ({ product }: any) => {
   };
 
   return (
-    <Row justify="center">
-      <Col
-        className="gutter-row"
-        lg={{ span: 11 }}
-        md={{ span: 11 }}
-        sm={{ span: 22 }}
-        xs={{ span: 22 }}
-      >
-        <Checkbox onChange={handleCheckbox} checked={product.check}></Checkbox>
-        <Image width={80} src={product.img[0]} alt={product.name} />
-        <span>{product.description}</span>
-        <span>{product.duration}</span>
-      </Col>
-      <Col
-        lg={{ span: 11 }}
-        md={{ span: 11 }}
-        sm={{ span: 22 }}
-        xs={{ span: 22 }}
-      >
-        <span style={{ marginLeft: 10 }}>{product.price}</span>
-
-        <Input
-          type="number"
-          style={{
-            width: 50,
-            textAlign: "center",
-            border: "1px solid #1890ff",
-          }}
-          value={input}
-          onChange={handleQuantity}
-          min={0}
-        />
-
-        <span style={{ marginLeft: 10 }}>{`${
-          product.price * product.qty
-        } đ`}</span>
-        <Button
-          type="primary"
-          danger
-          onClick={() => {
-            dispatch(removeCartItem(product));
-          }}
+    <div className="cartItem">
+      <Row justify="space-around" align="middle">
+        <Col
+          className="gutter-row"
+          lg={{ span: 11 }}
+          md={{ span: 24 }}
+          sm={{ span: 24 }}
+          xs={{ span: 24 }}
         >
-          Remove product
-        </Button>
-      </Col>
-    </Row>
+          <Row justify="space-around" align="middle">
+            <Col className="gutter-row" span={1}>
+              <Checkbox
+                onChange={handleCheckbox}
+                checked={product.check}
+              ></Checkbox>
+            </Col>
+            <Col className="gutter-row" span={4}>
+              <Image
+                style={{ width: "100%" }}
+                src={product.img[0]}
+                alt={product.name}
+              />
+            </Col>
+            <Col className="gutter-row" span={16}>
+              <strong>
+                {product.description}
+                {product.duration}
+              </strong>
+            </Col>
+          </Row>
+        </Col>
+
+        <Col
+          className="gutter-row"
+          lg={{ span: 12 }}
+          md={{ span: 24 }}
+          sm={{ span: 24 }}
+          xs={{ span: 24 }}
+        >
+          <Row justify="space-around" align="middle">
+            <Col className="gutter-row" span={5}>
+              <span style={{ marginLeft: 10 }}>{product.price}đ</span>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Input
+                type="number"
+                style={{
+                  width: 70,
+                  marginLeft: 10,
+                  textAlign: "center",
+                  border: "1px solid #1890ff",
+                }}
+                value={input}
+                onChange={handleQuantity}
+                min={0}
+              />
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <span style={{ marginLeft: 10 }}>{`${
+                product.price * product.qty
+              } đ`}</span>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Button
+                type="primary"
+                danger
+                onClick={() => {
+                  dispatch(removeCartItem(product));
+                }}
+              >
+                Remove
+              </Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

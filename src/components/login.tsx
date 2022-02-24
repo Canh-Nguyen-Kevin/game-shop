@@ -3,13 +3,19 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../features/auth/userAuth";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { showForm, hideForm, formState } from "../features/counter/formSlice";
+
 import {
   setActiveUser,
   setUserLogOut,
   selectUserName,
   selectUserEmail,
 } from "../features/counter/userSlice";
+import {
+  showForm,
+  showLoginForm,
+  loginFormState,
+  formState,
+} from "../features/counter/formSlice";
 
 import {
   Form,
@@ -44,11 +50,20 @@ const formItemLayout = {
   },
 };
 
-const Login = () => {
+const Login = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isLoginForm = useAppSelector(loginFormState);
+
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -63,7 +78,7 @@ const Login = () => {
             email: displayName,
           })
         );
-        dispatch(hideForm());
+        dispatch(showForm(false));
         // ...
       })
       .catch((error) => {
@@ -77,15 +92,24 @@ const Login = () => {
     <Form
       {...formItemLayout}
       name="normal_login"
-      className="login-form"
       labelAlign="left"
       initialValues={{ remember: true }}
-      // onFinish={onFinish}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
     >
       <Form.Item
         name="email"
         label="Email"
-        rules={[{ required: true, message: "Please input your Email!" }]}
+        rules={[
+          {
+            required: true,
+            pattern: new RegExp(
+              "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$"
+            ),
+            message: "Please input a valid E-mail address!",
+          },
+        ]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -109,23 +133,17 @@ const Login = () => {
         />
       </Form.Item>
 
-      <Form.Item
-        style={{
-          justifyContent: "center",
-          textAlign: "center",
-        }}
-      >
-        <Form.Item name="remember" valuePropName="checked" noStyle>
+      <div className="flex">
+        <div>
           <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <a className="login-form-forgot" href="">
-            Forgot password?
-          </a>
-        </Form.Item>
-      </Form.Item>
+        </div>
 
-      <Form.Item style={{ justifyContent: "center" }}>
+        <p>
+          <a href="">Forgot password?</a>
+        </p>
+      </div>
+
+      <div>
         <Button
           type="primary"
           htmlType="submit"
@@ -134,6 +152,45 @@ const Login = () => {
           onClick={handleLogin}
         >
           Log in
+        </Button>
+      </div>
+      <p style={{ textAlign: "center" }}>
+        <u>OR LOGIN WITH</u>
+      </p>
+      <div className="flex">
+        <div>
+          <Button
+            ghost
+            type="primary"
+            icon={<FacebookFilled />}
+            onClick={() => props.loginWithFacebook()}
+          >
+            Facebook
+          </Button>
+        </div>
+        <div>
+          <Button
+            ghost
+            danger
+            icon={<MailFilled />}
+            onClick={() => {
+              props.loginWithGoogle();
+            }}
+          >
+            Google
+          </Button>
+        </div>
+      </div>
+      <Form.Item style={{ justifyContent: "center" }}>
+        Don't have an account?
+        <Button
+          type="text"
+          danger
+          onClick={() => {
+            dispatch(showLoginForm(false));
+          }}
+        >
+          <strong>Register</strong>
         </Button>
       </Form.Item>
     </Form>

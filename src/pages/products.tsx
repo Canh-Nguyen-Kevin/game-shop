@@ -11,6 +11,7 @@ import {
   RocketFilled,
   AccountBookFilled,
   DatabaseFilled,
+  PieChartFilled,
 } from "@ant-design/icons";
 
 const style = { background: "#0092ff", padding: "8px 0" };
@@ -38,7 +39,16 @@ const Products = () => {
 
   return (
     <>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="start" className="products-container">
+        <div style={{ margin: "15px 20px" }}>
+          <h2>
+            <PieChartFilled className="icon" />
+            <span>STANDING OUT PRODUCTS</span>
+          </h2>
+          The list of trending products that you may like.
+        </div>
+      </Row>
+      <Row className="products-container" justify="space-around">
         {products
           .filter((item) => item.type === "entertain")
           .map((product) => {
@@ -55,24 +65,16 @@ const Products = () => {
             );
           })}
       </Row>
-      <Row justify="center">
-        <Col
-          className="gutter-row"
-          lg={{ span: 20 }}
-          md={{ span: 21 }}
-          sm={{ span: 22 }}
-          xs={{ span: 22 }}
-        >
-          <div style={{ margin: "15px 0" }}>
-            <h2>
-              <FundFilled />
-              <strong>Top selling products</strong>
-            </h2>
-            The list of trending products that you may like.
-          </div>
-        </Col>
+      <Row justify="start" className="products-container">
+        <div style={{ margin: "15px 20px" }}>
+          <h2>
+            <FundFilled className="icon" />
+            <span>TOP SELLING PRODUCTS</span>
+          </h2>
+          The list of trending products that you may like.
+        </div>
       </Row>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="space-around" className="products-container">
         {products
           .filter((item) => item.type === "topSelling")
           .map((product) => {
@@ -89,24 +91,16 @@ const Products = () => {
             );
           })}
       </Row>
-      <Row justify="center">
-        <Col
-          className="gutter-row"
-          lg={{ span: 20 }}
-          md={{ span: 21 }}
-          sm={{ span: 22 }}
-          xs={{ span: 22 }}
-        >
-          <div style={{ margin: "15px 0" }}>
-            <h2>
-              <RocketFilled />
-              <strong>Games on Steam</strong>
-            </h2>
-            The list of trending products that you may like.
-          </div>
-        </Col>
+      <Row justify="start" className="products-container">
+        <div style={{ margin: "15px 20px" }}>
+          <h2>
+            <RocketFilled className="icon" />
+            <span>GAMES ON STEAM</span>
+          </h2>
+          The list of trending products that you may like.
+        </div>
       </Row>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="space-around" className="products-container">
         {products
           .filter((item) => item.type === "games")
           .map((product) => {
@@ -123,24 +117,16 @@ const Products = () => {
             );
           })}
       </Row>
-      <Row justify="center">
-        <Col
-          className="gutter-row"
-          lg={{ span: 20 }}
-          md={{ span: 21 }}
-          sm={{ span: 22 }}
-          xs={{ span: 22 }}
-        >
-          <div style={{ margin: "15px 0" }}>
-            <h2>
-              <AndroidFilled />
-              <strong>Useful apps</strong>
-            </h2>
-            The list of trending products that you may like.
-          </div>
-        </Col>
+      <Row justify="start" className="products-container">
+        <div style={{ margin: "15px 20px" }}>
+          <h2>
+            <AndroidFilled className="icon" />
+            <span>USEFUL APPS</span>
+          </h2>
+          The list of trending products that you may like.
+        </div>
       </Row>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="space-around" className="products-container">
         {products
           .filter((item) => item.type === "apps")
           .map((product) => {
@@ -157,24 +143,16 @@ const Products = () => {
             );
           })}
       </Row>
-      <Row justify="center">
-        <Col
-          className="gutter-row"
-          lg={{ span: 20 }}
-          md={{ span: 21 }}
-          sm={{ span: 22 }}
-          xs={{ span: 22 }}
-        >
-          <div style={{ margin: "15px 0" }}>
-            <h2>
-              <AccountBookFilled />
-              <strong>Code Wallet</strong>
-            </h2>
-            The list of trending products that you may like.
-          </div>
-        </Col>
+      <Row justify="start" className="products-container">
+        <div style={{ margin: "15px 20px" }}>
+          <h2>
+            <AccountBookFilled className="icon" />
+            <span>CODE WALLET</span>
+          </h2>
+          The list of trending products that you may like.
+        </div>
       </Row>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="space-around" className="products-container">
         {products
           .filter((item) => item.type === "codes")
           .map((product) => {
@@ -191,24 +169,16 @@ const Products = () => {
             );
           })}
       </Row>
-      <Row justify="center">
-        <Col
-          className="gutter-row"
-          lg={{ span: 20 }}
-          md={{ span: 21 }}
-          sm={{ span: 22 }}
-          xs={{ span: 22 }}
-        >
-          <div style={{ margin: "15px 0" }}>
-            <h2>
-              <DatabaseFilled />
-              <strong>Mobile Data</strong>
-            </h2>
-            The list of trending products that you may like.
-          </div>
-        </Col>
+      <Row justify="start" className="products-container">
+        <div style={{ margin: "15px 20px" }}>
+          <h2>
+            <DatabaseFilled className="icon" />
+            <span>MOBILE DATA</span>
+          </h2>
+          The list of trending products that you may like.
+        </div>
       </Row>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="space-around" className="products-container">
         {products
           .filter((item) => item.type === "data")
           .map((product) => {

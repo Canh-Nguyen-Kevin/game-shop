@@ -1,15 +1,9 @@
-import { Carousel } from "antd";
-import CSS from "csstype";
+import { Carousel, Row, Col } from "antd";
+
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./slider.css";
-import { SliderImages, BannerImages } from "../components/images";
+import { SliderImages, BannerImages } from "./images";
 
-const contentStyle: CSS.Properties = {
-  width: "70%",
-  height: "50vh",
-  color: "#fff",
-  fontSize: "1.5rem",
-};
 const renderSlider = () => {
   return SliderImages.map((item) => {
     return (
@@ -18,7 +12,7 @@ const renderSlider = () => {
           className="sliderImages"
           src={item.image}
           alt="image"
-          style={{ width: "100%", height: "50vh" }}
+          style={{ width: "100%" }}
         />
       </div>
     );
@@ -26,14 +20,27 @@ const renderSlider = () => {
 };
 const renderBanner = () => {
   return BannerImages.map((item) => {
-    return <img src={item.image} alt="image" key={item.id} />;
+    return (
+      <img
+        src={item.image}
+        alt="image"
+        key={item.id}
+        style={{ width: "100%" }}
+      />
+    );
   });
 };
 
 const Slider = () => {
   return (
-    <div style={{ display: "flex" }}>
-      <div style={contentStyle}>
+    <Row justify="space-between">
+      <Col
+        className="gutter-row"
+        lg={{ span: 18 }}
+        md={{ span: 18 }}
+        sm={{ span: 24 }}
+        xs={{ span: 24 }}
+      >
         <Carousel
           autoplay
           arrows
@@ -42,14 +49,17 @@ const Slider = () => {
         >
           {renderSlider()}
         </Carousel>
-      </div>
-      <div
-        className="banner"
-        style={{ width: "30%", display: "flex", flexDirection: "column" }}
+      </Col>
+      <Col
+        className="gutter-row"
+        lg={{ span: 6 }}
+        md={{ span: 6 }}
+        sm={{ span: 0 }}
+        xs={{ span: 0 }}
       >
         {renderBanner()}
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 };
 export default Slider;

@@ -16,13 +16,8 @@ import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 const Footer = () => {
   return (
-    <>
-      <Row
-        gutter={16}
-        align="middle"
-        justify="center"
-        style={{ marginTop: 50 }}
-      >
+    <div className="footer">
+      <Row align="middle" justify="center" className="products-container">
         <Col
           className="gutter-row"
           lg={{ span: 5 }}
@@ -88,7 +83,7 @@ const Footer = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

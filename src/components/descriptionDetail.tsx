@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Rate, Input, notification } from "antd";
+import { Button, Rate, Input, notification, Row, Col } from "antd";
 import {
   CheckCircleFilled,
   ShoppingCartOutlined,
   DollarOutlined,
+  SendOutlined,
 } from "@ant-design/icons";
 
 import { addCartItem } from "../features/counter/cartSlice";
@@ -15,7 +16,7 @@ import {
   selectCount,
 } from "../features/counter/counterSlice";
 import { selectUserEmail } from "../features/counter/userSlice";
-import { showForm, hideForm } from "../features/counter/formSlice";
+import { showForm, showLoginForm } from "../features/counter/formSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 const openNotification = (
@@ -46,7 +47,7 @@ const DescriptionDetail = ({ item }: any) => {
         alert("please choose product's duration");
         return;
       }
-
+      console.log("email", userEmail);
       dispatch(
         addCartItem({
           ...item,
@@ -63,7 +64,8 @@ const DescriptionDetail = ({ item }: any) => {
         "The product has been added to cart"
       );
     } else {
-      dispatch(showForm());
+      dispatch(showForm(true));
+      dispatch(showLoginForm(false));
       alert("please login to use this function");
     }
   };
@@ -72,7 +74,6 @@ const DescriptionDetail = ({ item }: any) => {
     if (userEmail) {
       if (!duration) {
         alert("please choose product's duration");
-
         return;
       }
       dispatch(
@@ -86,8 +87,9 @@ const DescriptionDetail = ({ item }: any) => {
         })
       );
     } else {
-      dispatch(showForm());
-      alert("please login to use this function");
+      dispatch(showForm(true));
+      dispatch(showLoginForm(false));
+      alert("please login to use this feature");
     }
   };
   return (
@@ -96,34 +98,34 @@ const DescriptionDetail = ({ item }: any) => {
       <strong style={{ fontSize: 15, marginRight: 10 }}>Type: {type}</strong>
 
       <Rate disabled defaultValue={5} />
-      <span style={{ color: "red", fontSize: 15, marginLeft: 10 }}>5.0</span>
+      <span className="icon" style={{ fontSize: 15, marginLeft: 10 }}>
+        5.0
+      </span>
       <div style={{ display: "flex" }}>
-        <h2 style={{ color: "blue" }}>{pricing ? pricing : price}đ</h2>
+        <h2 className="icon">{pricing ? pricing : price}đ</h2>
         <h2 style={{ marginLeft: 30, color: "red" }}>
           -{discounting ? discounting : discount}% discount
         </h2>
       </div>
-      <h2 style={{ color: "blue" }}>FREE SHIP FOR ALL PRODUCTS</h2>
+      <h2>
+        <SendOutlined className="icon" />
+        FREE SHIP FOR ALL PRODUCTS
+      </h2>
       <div>
         <strong style={{ marginRight: 20, fontSize: "1.3rem" }}>
           Quantity:
         </strong>
-        <Button type="primary" ghost onClick={() => dispatch(decrement())}>
-          -
-        </Button>
+        <Button onClick={() => dispatch(decrement())}>-</Button>
         <Input
           style={{
             width: 50,
             textAlign: "center",
-            border: "1px solid #1890ff",
           }}
           value={quantity}
           onChange={(e) => e.target.value}
           min={0}
         />
-        <Button type="primary" ghost onClick={() => dispatch(increment())}>
-          +
-        </Button>
+        <Button onClick={() => dispatch(increment())}>+</Button>
       </div>
       <div
         style={{
@@ -133,8 +135,7 @@ const DescriptionDetail = ({ item }: any) => {
       >
         <Button
           size="large"
-          danger
-          style={{ width: 100, fontSize: "1.1rem" }}
+          style={{ width: 95, fontSize: "1.1rem" }}
           onClick={() => {
             setPricing(price);
             setDiscounting(discount);
@@ -144,9 +145,8 @@ const DescriptionDetail = ({ item }: any) => {
           1 month
         </Button>
         <Button
-          danger
           size="large"
-          style={{ width: 100, fontSize: "1.1rem" }}
+          style={{ width: 95, fontSize: "1.1rem" }}
           onClick={() => {
             setPricing(price * 2);
             setDiscounting(discount / 2);
@@ -157,9 +157,8 @@ const DescriptionDetail = ({ item }: any) => {
         </Button>
 
         <Button
-          danger
           size="large"
-          style={{ width: 100, fontSize: "1.1rem" }}
+          style={{ width: 95, fontSize: "1.1rem" }}
           onClick={() => {
             setPricing(price * 3);
             setDiscounting(discount / 2);
@@ -169,9 +168,8 @@ const DescriptionDetail = ({ item }: any) => {
           1 year
         </Button>
         <Button
-          danger
           size="large"
-          style={{ width: 100, fontSize: "1.1rem" }}
+          style={{ width: 95, fontSize: "1.1rem" }}
           onClick={() => {
             setPricing(price * 5);
             setDiscounting(discount / 2);
@@ -183,8 +181,8 @@ const DescriptionDetail = ({ item }: any) => {
       </div>
       <div style={{ marginTop: 30 }}>
         <Button
-          type="primary"
           size="large"
+          ghost
           danger
           icon={<ShoppingCartOutlined />}
           onClick={addProductToCart}
@@ -195,6 +193,7 @@ const DescriptionDetail = ({ item }: any) => {
         <Link to={!duration ? `/products/${id}` : "/cart"}>
           <Button
             type="primary"
+            danger
             size="large"
             icon={<DollarOutlined />}
             onClick={buyNow}

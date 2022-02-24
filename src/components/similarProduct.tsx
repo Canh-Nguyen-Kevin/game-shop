@@ -19,12 +19,12 @@ const SimilarProduct = ({ item }: any) => {
     setProductQty(moreProducts);
   };
   return (
-    <>
-      <h1 style={{ marginLeft: "10%" }}>
-        <FileUnknownOutlined />
+    <div className="products-container">
+      <h1 style={{ paddingLeft: 20 }}>
+        <FileUnknownOutlined className="icon" />
         Similar products
       </h1>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+      <Row justify="space-around">
         {products
           .filter((product) => product.type === item.type)
           .slice(0, productQty)
@@ -32,9 +32,9 @@ const SimilarProduct = ({ item }: any) => {
             return (
               <Col
                 className="gutter-row"
-                lg={{ span: 5 }}
-                md={{ span: 7 }}
-                sm={{ span: 11 }}
+                lg={{ span: 22 }}
+                md={{ span: 22 }}
+                sm={{ span: 22 }}
                 xs={{ span: 22 }}
               >
                 <ProductCard product={item} />
@@ -43,11 +43,11 @@ const SimilarProduct = ({ item }: any) => {
           })}
       </Row>
       <div style={{ textAlign: "center" }}>
-        <Button type="primary" danger onClick={handleLoadMore}>
+        <Button ghost danger onClick={handleLoadMore}>
           Load more
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
