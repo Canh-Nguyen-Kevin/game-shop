@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  addCartItem,
-  removeCartItem,
-  adjustQty,
-  checkProduct,
-  currentCart,
-} from "../features/counter/cartSlice";
 
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { Row, Col, Divider, Button, Rate, Input, Checkbox, Image } from "antd";
+import { Row, Col, Image } from "antd";
 
 const PaymentItem = ({ product }: any) => {
   const dispatch = useAppDispatch();

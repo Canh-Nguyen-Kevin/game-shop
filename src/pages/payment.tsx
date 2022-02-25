@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Steps, Menu, Input, Button, Checkbox, Row, Col } from "antd";
+import React from "react";
+import { Steps } from "antd";
 import {
   UserOutlined,
   ShoppingCartOutlined,
   GiftOutlined,
   DollarOutlined,
-  EnvironmentOutlined,
-  CloseCircleFilled,
-  DiffOutlined,
 } from "@ant-design/icons";
-import AddressForm from "../components/addressForm";
+
 import {
   showAddressForm,
   addressFormState,
 } from "../features/counter/formSlice";
 
-import { currentCart } from "../features/counter/cartSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 import PaymentAddress from "../components/paymentAddress";
@@ -54,16 +50,6 @@ const Payment = () => {
       <PaymentAddress />
       <PaymentProducts />
       <PaymentSummary />
-
-      {showForm ? (
-        <div style={{ width: "50%" }} className="info-container form">
-          <CloseCircleFilled
-            className="close"
-            onClick={() => dispatch(showAddressForm(false))}
-          />
-          <AddressForm />
-        </div>
-      ) : null}
     </div>
   );
 };

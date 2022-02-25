@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { Image } from "antd";
 
-import {
-  FacebookOutlined,
-  ShoppingCartOutlined,
-  DollarOutlined,
-  SendOutlined,
-} from "@ant-design/icons";
 const ImageDetail = ({ item }: any) => {
   const [index, setIndex] = useState(0);
 

@@ -1,15 +1,5 @@
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Layout,
-  Input,
-  Menu,
-  Badge,
-  Avatar,
-  Dropdown,
-  Button,
-} from "antd";
+
 import { Row, Col, Divider, Card } from "antd";
 
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";

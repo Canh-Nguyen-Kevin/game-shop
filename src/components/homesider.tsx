@@ -1,18 +1,14 @@
 import React from "react";
 import { Layout, Input, Menu } from "antd";
 import {
-  UserOutlined,
-  LaptopOutlined,
   QqCircleFilled,
   FireFilled,
   HourglassFilled,
   RocketFilled,
   TrophyFilled,
   ThunderboltFilled,
-  SketchCircleFilled,
 } from "@ant-design/icons";
 
-const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 const HomeSider = () => {

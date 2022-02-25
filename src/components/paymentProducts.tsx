@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Steps, Menu, Input, Button, Checkbox, Row, Col } from "antd";
+import React from "react";
+import { Row, Col } from "antd";
 
-import { addressState } from "../features/counter/userSlice";
 import { currentCart } from "../features/counter/cartSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import PaymentItem from "../components/paymentItem";

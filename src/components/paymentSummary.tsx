@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Steps, Menu, Input, Button, Checkbox, Row, Col } from "antd";
-import {
-  UserOutlined,
-  ShoppingCartOutlined,
-  GiftOutlined,
-  DollarOutlined,
-  EnvironmentOutlined,
-  CloseCircleFilled,
-  DiffOutlined,
-} from "@ant-design/icons";
+import { Button, Row, Col } from "antd";
 
 import { currentCart } from "../features/counter/cartSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";

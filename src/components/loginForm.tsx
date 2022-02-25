@@ -16,12 +16,7 @@ import {
   facebookProvider,
   googleProvider,
 } from "../features/auth/userAuth";
-import {
-  setActiveUser,
-  setUserLogOut,
-  selectUserName,
-  selectUserEmail,
-} from "../features/counter/userSlice";
+import { setActiveUser } from "../features/counter/userSlice";
 
 import Register from "./register";
 import Login from "./login";
@@ -29,22 +24,11 @@ import { Card, Row, Col, Button } from "antd";
 
 import { UserOutlined, CloseCircleFilled } from "@ant-design/icons";
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    md: { span: 8, offset: 0 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
-
 const RegisterDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
       <Card title="Register" bordered={false}>
-        <img src="/images/bird.png" alt="image" />
+        <img src="/images/bird.png" alt="image" style={{ width: "100%" }} />
       </Card>
     </div>
   );
@@ -54,7 +38,7 @@ const LoginDes = () => {
   return (
     <div className="site-card-border-less-wrapper">
       <Card title="Login" bordered={false}>
-        <img src="/images/person.png" alt="image" />
+        <img src="/images/person.png" alt="image" style={{ width: "100%" }} />
       </Card>
     </div>
   );
@@ -75,10 +59,10 @@ export const LoginForm = () => {
           email: result.user.email,
           token: token,
         };
-        // if (localStorage.getItem("user")) return;
+
         localStorage.setItem("user", JSON.stringify(loginUser));
         const getUser: any = localStorage.getItem("user");
-        // console.log("result", getUser);
+
         dispatch(
           setActiveUser({
             userName: loginUser.userName,
@@ -115,38 +99,45 @@ export const LoginForm = () => {
   };
 
   return (
-    <Row className="login-form">
-      <CloseCircleFilled
-        style={{
-          fontSize: "2rem",
-          position: "absolute",
-          top: "-15px",
-          right: "-15px",
-          zIndex: 100,
-        }}
-        onClick={() => dispatch(showForm(false))}
-      />
-      <Col lg={{ span: 12 }} md={{ span: 0 }} sm={{ span: 0 }} xs={{ span: 0 }}>
-        {isLoginForm ? LoginDes() : RegisterDes()}
-      </Col>
-      <Col
-        lg={{ span: 12 }}
-        md={{ span: 24 }}
-        sm={{ span: 24 }}
-        xs={{ span: 24 }}
-      >
-        {isLoginForm ? (
-          <Login
-            loginWithFacebook={loginWithFacebook}
-            loginWithGoogle={loginWithGoogle}
-          />
-        ) : (
-          <Register
-            loginWithFacebook={loginWithFacebook}
-            loginWithGoogle={loginWithGoogle}
-          />
-        )}
-      </Col>
-    </Row>
+    <div className="login-form">
+      <Row>
+        <CloseCircleFilled
+          style={{
+            fontSize: "2rem",
+            position: "absolute",
+            top: "-15px",
+            right: "-15px",
+            zIndex: 100,
+          }}
+          onClick={() => dispatch(showForm(false))}
+        />
+        <Col
+          lg={{ span: 12 }}
+          md={{ span: 0 }}
+          sm={{ span: 0 }}
+          xs={{ span: 0 }}
+        >
+          {isLoginForm ? LoginDes() : RegisterDes()}
+        </Col>
+        <Col
+          lg={{ span: 12 }}
+          md={{ span: 24 }}
+          sm={{ span: 24 }}
+          xs={{ span: 24 }}
+        >
+          {isLoginForm ? (
+            <Login
+              loginWithFacebook={loginWithFacebook}
+              loginWithGoogle={loginWithGoogle}
+            />
+          ) : (
+            <Register
+              loginWithFacebook={loginWithFacebook}
+              loginWithGoogle={loginWithGoogle}
+            />
+          )}
+        </Col>
+      </Row>
+    </div>
   );
 };

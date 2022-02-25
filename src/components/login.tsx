@@ -4,12 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../features/auth/userAuth";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
-import {
-  setActiveUser,
-  setUserLogOut,
-  selectUserName,
-  selectUserEmail,
-} from "../features/counter/userSlice";
+import { setActiveUser } from "../features/counter/userSlice";
 import {
   showForm,
   showLoginForm,
@@ -17,25 +12,11 @@ import {
   formState,
 } from "../features/counter/formSlice";
 
-import {
-  Form,
-  Input,
-  InputNumber,
-  Card,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete,
-} from "antd";
+import { Form, Input, Checkbox, Button } from "antd";
 
 import {
-  DownOutlined,
   UserOutlined,
-  PhoneOutlined,
   LockOutlined,
-  CloseCircleFilled,
   FacebookFilled,
   MailFilled,
 } from "@ant-design/icons";
@@ -54,8 +35,6 @@ const Login = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useAppDispatch();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const isLoginForm = useAppSelector(loginFormState);
 
   const onFinish = (values: any) => {
     console.log("Success:", values);

@@ -5,10 +5,7 @@ import {
   AccountBookOutlined,
   DeliveredProcedureOutlined,
   DropboxOutlined,
-  DislikeOutlined,
   LikeOutlined,
-  DislikeFilled,
-  LikeFilled,
 } from "@ant-design/icons";
 import { selectUserName } from "../features/counter/userSlice";
 

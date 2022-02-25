@@ -12,6 +12,31 @@ $red: #ff4d4f;
   position: relative;
   background-color: $gray;
 }
+.form {
+  position: absolute;
+  z-index: 90;
+  top: 0;
+  left: 20vw;
+  margin-top: 100px;
+  border: 1px solid $gray;
+}
+.login-form {
+  background-color: white;
+  width: 60vw;
+  min-height: 50vh;
+  padding: 15px;
+  position: relative;
+}
+.address-form {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  margin-top: 100px;
+  border: 1px solid $gray;
+  background-color: white;
+  min-height: 50vh;
+  padding: 15px;
+}
 .mainLayout {
   width: 90%;
   margin: 0 auto;
@@ -50,20 +75,7 @@ $red: #ff4d4f;
   width: 100%;
   background-color: white;
 }
-.form {
-  position: fixed;
-  z-index: 90;
-  top: 13vh;
-  left: 20vw;
-  border: 1px solid $gray;
-}
-.login-form {
-  background-color: white;
-  width: 60vw;
-  min-height: 50vh;
-  padding: 15px;
-  position: relative;
-}
+
 .menu {
   width: 250px;
   background-color: $cyan;

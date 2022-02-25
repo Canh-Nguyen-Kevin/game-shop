@@ -9,11 +9,13 @@ import { useAppSelector, useAppDispatch } from "../app/hooks";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
+    sm: { span: 24 },
     md: { span: 8, offset: 0 },
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 16 },
+    sm: { span: 24 },
+    md: { span: 16 },
   },
 };
 const AddressForm = () => {
@@ -36,6 +38,15 @@ const AddressForm = () => {
   };
 
   const handleAddress = () => {
+    if (
+      !fullName ||
+      !phoneNumber ||
+      !province ||
+      !district ||
+      !ward ||
+      !streetAddress
+    )
+      return;
     dispatch(
       setuserAddress({
         fullName,
@@ -57,11 +68,9 @@ const AddressForm = () => {
   return (
     <Form
       {...formItemLayout}
-      layout="vertical"
       name="register"
       labelAlign="left"
       scrollToFirstError
-      style={{ width: "100%" }}
     >
       <Form.Item
         name="username"
@@ -105,22 +114,13 @@ const AddressForm = () => {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </Form.Item>
-      <Form.Item
-        name="address"
-        label="Province/District/Ward"
-        rules={[
-          {
-            required: true,
-            message: "Please input your valid phone number!",
-          },
-        ]}
-      >
-        <AddressPicker
-          handleProvince={handleProvince}
-          handleDistrict={handleDistrict}
-          handleWard={handleWard}
-        />
-      </Form.Item>
+
+      <AddressPicker
+        handleProvince={handleProvince}
+        handleDistrict={handleDistrict}
+        handleWard={handleWard}
+      />
+
       <Form.Item
         name="Address"
         label="Address"
@@ -136,23 +136,27 @@ const AddressForm = () => {
       <Form.Item name="remember" valuePropName="checked" noStyle>
         <Checkbox>Make this my default address</Checkbox>
       </Form.Item>
-      <Form.Item style={{ justifyContent: "space-around" }}>
-        <Button
-          type="primary"
-          style={{ width: "40%" }}
-          onClick={() => dispatch(showAddressForm(false))}
-        >
-          Back
-        </Button>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ width: "40%" }}
-          onClick={handleAddress}
-        >
-          Continue
-        </Button>
-      </Form.Item>
+      <div className="flex">
+        <div>
+          <Button
+            type="primary"
+            style={{ width: "100px" }}
+            onClick={() => dispatch(showAddressForm(false))}
+          >
+            Back
+          </Button>
+        </div>
+        <div>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ width: "100px" }}
+            onClick={handleAddress}
+          >
+            Continue
+          </Button>
+        </div>
+      </div>
     </Form>
   );
 };

@@ -36,7 +36,7 @@ const InCartProduct = () => {
 
   return (
     <>
-      <div style={{ marginTop: 20 }}>
+      <div>
         <Row justify="space-between" gutter={10}>
           <Col
             className="gutter-row"

@@ -4,10 +4,6 @@ import {
   UserOutlined,
   DownOutlined,
   SolutionOutlined,
-  DollarOutlined,
-  EnvironmentOutlined,
-  CloseCircleFilled,
-  DiffOutlined,
 } from "@ant-design/icons";
 
 const MethodMenu = ({ getMethod }: any) => {

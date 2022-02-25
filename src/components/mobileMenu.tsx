@@ -7,10 +7,8 @@ import {
   UserOutlined,
   HomeFilled,
   QqCircleFilled,
-  FireFilled,
   HourglassFilled,
   RocketFilled,
-  TrophyFilled,
   ThunderboltFilled,
   LogoutOutlined,
 } from "@ant-design/icons";

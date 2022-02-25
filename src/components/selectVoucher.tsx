@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Row, Col } from "antd";
-import {
-  UserOutlined,
-  DownOutlined,
-  GiftOutlined,
-  DollarOutlined,
-  EnvironmentOutlined,
-  CloseCircleFilled,
-  DiffOutlined,
-} from "@ant-design/icons";
+import { DownOutlined, GiftOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const VoucherMenu = ({ getVoucher, subtotal }: any) => {
   console.log("tao", subtotal);

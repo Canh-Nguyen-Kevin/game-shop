@@ -5,20 +5,12 @@ import {
   showLoginForm,
   formState,
 } from "../features/counter/formSlice";
-import {
-  createUser,
-  setActiveUser,
-  setUserLogOut,
-  selectUserName,
-  selectUserEmail,
-} from "../features/counter/userSlice";
+import { createUser } from "../features/counter/userSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../features/auth/userAuth";
 import { Form, Input, Button, AutoComplete } from "antd";
 
 import {
-  DownOutlined,
-  UserOutlined,
   PhoneOutlined,
   LockOutlined,
   MailFilled,

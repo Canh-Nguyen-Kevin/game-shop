@@ -159,17 +159,17 @@ export const UserMenu = () => {
   };
   return (
     <Menu style={{ width: 230, height: "auto", borderRadius: 5 }}>
-      <React.Fragment>
-        <Menu.Item key="1" onClick={() => console.log("User profile")}>
-          My profile
-        </Menu.Item>
-        <Menu.Item key="2" onClick={() => console.log("Purchase history")}>
-          Purchase history
-        </Menu.Item>
+      <Menu.Item key="1" onClick={() => console.log("User profile")}>
+        My profile
+      </Menu.Item>
+      <Menu.Item key="2" onClick={() => console.log("Purchase history")}>
+        Purchase history
+      </Menu.Item>
+      <Link to="./">
         <Menu.Item key="3" onClick={handleSignOut}>
           Log out
         </Menu.Item>
-      </React.Fragment>
+      </Link>
     </Menu>
   );
 };

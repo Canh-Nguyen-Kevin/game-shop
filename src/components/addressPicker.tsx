@@ -86,68 +86,82 @@ const AddressPicker = (props: any) => {
 
   return (
     <>
-      <Select
-        showSearch
-        placeholder="Province..."
-        optionFilterProp="children"
-        onChange={(value: number) => setProvinceCode(value)}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA: any, optionB: any) =>
-          optionA.children
-            .toLowerCase()
-            .localeCompare(optionB.children.toLowerCase())
-        }
+      <Form.Item
+        name="address"
+        label="Province"
+        rules={[
+          {
+            required: true,
+            message: "Please pick your province!",
+          },
+        ]}
       >
-        {provinces
-          ? provinces.map((province: any) => {
-              return <Option value={province.code}>{province.name}</Option>;
-            })
-          : null}
-      </Select>
+        <Select
+          showSearch
+          placeholder="Province..."
+          optionFilterProp="children"
+          defaultActiveFirstOption={true}
+          onChange={(value: number) => setProvinceCode(value)}
+          filterOption={(input, option: any) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          filterSort={(optionA: any, optionB: any) =>
+            optionA.children
+              .toLowerCase()
+              .localeCompare(optionB.children.toLowerCase())
+          }
+        >
+          {provinces
+            ? provinces.map((province: any) => {
+                return <Option value={province.code}>{province.name}</Option>;
+              })
+            : null}
+        </Select>
 
-      <Select
-        showSearch
-        placeholder="District..."
-        optionFilterProp="children"
-        onChange={(value: number) => setDistrictCode(value)}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA: any, optionB: any) =>
-          optionA.children
-            .toLowerCase()
-            .localeCompare(optionB.children.toLowerCase())
-        }
-      >
-        {districts
-          ? districts.map((district: any) => {
-              return <Option value={district.code}>{district.name}</Option>;
-            })
-          : null}
-      </Select>
+        <Select
+          showSearch
+          placeholder="District..."
+          optionFilterProp="children"
+          defaultActiveFirstOption={true}
+          onChange={(value: number) => setDistrictCode(value)}
+          filterOption={(input, option: any) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          filterSort={(optionA: any, optionB: any) =>
+            optionA.children
+              .toLowerCase()
+              .localeCompare(optionB.children.toLowerCase())
+          }
+        >
+          {districts
+            ? districts.map((district: any) => {
+                return <Option value={district.code}>{district.name}</Option>;
+              })
+            : null}
+        </Select>
 
-      <Select
-        showSearch
-        placeholder="Ward..."
-        optionFilterProp="children"
-        onChange={(value: number) => setWardCode(value)}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA: any, optionB: any) =>
-          optionA.children
-            .toLowerCase()
-            .localeCompare(optionB.children.toLowerCase())
-        }
-      >
-        {wards
-          ? wards.map((ward: any) => {
-              return <Option value={ward.code}>{ward.name}</Option>;
-            })
-          : null}
-      </Select>
+        <Select
+          showSearch
+          placeholder="Ward..."
+          optionFilterProp="children"
+          defaultActiveFirstOption={true}
+          onChange={(value: number) => setWardCode(value)}
+          filterOption={(input, option: any) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          filterSort={(optionA: any, optionB: any) =>
+            optionA.children
+              .toLowerCase()
+              .localeCompare(optionB.children.toLowerCase())
+          }
+        >
+          {wards
+            ? wards.map((ward: any) => {
+                return <Option value={ward.code}>{ward.name}</Option>;
+              })
+            : null}
+        </Select>
+      </Form.Item>
     </>
   );
 };
