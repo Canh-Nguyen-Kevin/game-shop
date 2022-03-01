@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { resetCount } from "../features/counter/counterSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { motion } from "framer-motion";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ProductCard = ({ product }: any) => {
@@ -10,9 +11,17 @@ const ProductCard = ({ product }: any) => {
   const dispatch = useAppDispatch();
   return (
     <Link to={`/products/${id}`}>
-      <div onClick={() => dispatch(resetCount())} className="product-card">
+      <motion.div
+        layout
+        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.75 }}
+        onClick={() => dispatch(resetCount())}
+        className="product-card"
+      >
         <LazyLoadImage
-          src={`/${img[0]}`}
+          src={`${img[0]}`}
           effect="blur"
           alt="image"
           style={{ width: "100%" }}
@@ -22,7 +31,7 @@ const ProductCard = ({ product }: any) => {
           <h4 style={{ color: "#1890ff" }}>{price}đ</h4>
           <h4 style={{ color: "#ff4d4f" }}>-{discount}%</h4>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 };

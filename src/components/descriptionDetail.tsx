@@ -18,6 +18,7 @@ import {
 import { selectUserEmail } from "../features/counter/userSlice";
 import { showForm, showLoginForm } from "../features/counter/formSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { DescriptionSkeleton } from "./skeleton";
 
 const openNotification = (
   placement: string,
@@ -31,7 +32,7 @@ const openNotification = (
   });
 };
 
-const DescriptionDetail = ({ item }: any) => {
+const DescriptionDetail = ({ item, isLoading }: any) => {
   const [pricing, setPricing] = useState<number>();
   const [discounting, setDiscounting] = useState<number>();
   const [duration, setDuration] = useState<number | string>();
@@ -93,117 +94,128 @@ const DescriptionDetail = ({ item }: any) => {
     }
   };
   return (
-    <div>
-      <h1>{description}</h1>
-      <strong style={{ fontSize: 15, marginRight: 10 }}>Type: {type}</strong>
+    <>
+      {isLoading ? (
+        <DescriptionSkeleton />
+      ) : (
+        <div>
+          <h1>{description}</h1>
+          <strong style={{ fontSize: 15, marginRight: 10 }}>
+            Type: {type}
+          </strong>
 
-      <Rate disabled defaultValue={5} />
-      <span className="icon" style={{ fontSize: 15, marginLeft: 10 }}>
-        5.0
-      </span>
-      <div style={{ display: "flex" }}>
-        <h2 className="icon">{pricing ? pricing : price}đ</h2>
-        <h2 style={{ marginLeft: 30, color: "red" }}>
-          -{discounting ? discounting : discount}% discount
-        </h2>
-      </div>
-      <h2>
-        <SendOutlined className="icon" />
-        FREE SHIP FOR ALL PRODUCTS
-      </h2>
-      <div>
-        <strong style={{ marginRight: 20, fontSize: "1.3rem" }}>
-          Quantity:
-        </strong>
-        <Button onClick={() => dispatch(decrement())}>-</Button>
-        <Input
-          style={{
-            width: 50,
-            textAlign: "center",
-          }}
-          value={quantity}
-          onChange={(e) => e.target.value}
-          min={0}
-        />
-        <Button onClick={() => dispatch(increment())}>+</Button>
-      </div>
-      <div
-        style={{
-          marginTop: 30,
-          display: "flex",
-        }}
-      >
-        <Button
-          size="large"
-          style={{ width: 95, fontSize: "1.1rem" }}
-          onClick={() => {
-            setPricing(price);
-            setDiscounting(discount);
-            setDuration("1 month");
-          }}
-        >
-          1 month
-        </Button>
-        <Button
-          size="large"
-          style={{ width: 95, fontSize: "1.1rem" }}
-          onClick={() => {
-            setPricing(price * 2);
-            setDiscounting(discount / 2);
-            setDuration("6 months");
-          }}
-        >
-          6 months
-        </Button>
-
-        <Button
-          size="large"
-          style={{ width: 95, fontSize: "1.1rem" }}
-          onClick={() => {
-            setPricing(price * 3);
-            setDiscounting(discount / 2);
-            setDuration("1 year");
-          }}
-        >
-          1 year
-        </Button>
-        <Button
-          size="large"
-          style={{ width: 95, fontSize: "1.1rem" }}
-          onClick={() => {
-            setPricing(price * 5);
-            setDiscounting(discount / 2);
-            setDuration("Life time");
-          }}
-        >
-          Life time
-        </Button>
-      </div>
-      <div style={{ marginTop: 30 }}>
-        <Button
-          size="large"
-          ghost
-          danger
-          icon={<ShoppingCartOutlined />}
-          onClick={addProductToCart}
-          style={{ width: 170, marginRight: 20, fontSize: "1.1rem" }}
-        >
-          Add to cart
-        </Button>
-        <Link to={!duration ? `/products/${id}` : "/cart"}>
-          <Button
-            type="primary"
-            danger
-            size="large"
-            icon={<DollarOutlined />}
-            onClick={buyNow}
-            style={{ width: 170, fontSize: "1.1rem" }}
+          <Rate disabled defaultValue={5} />
+          <span className="icon" style={{ fontSize: 15, marginLeft: 10 }}>
+            5.0
+          </span>
+          <div style={{ display: "flex" }}>
+            <h2 className="icon">{pricing ? pricing : price}đ</h2>
+            <h2 style={{ marginLeft: 30, color: "red" }}>
+              -{discounting ? discounting : discount}% discount
+            </h2>
+          </div>
+          <h2>
+            <SendOutlined className="icon" />
+            FREE SHIP FOR ALL PRODUCTS
+          </h2>
+          <div>
+            <strong style={{ marginRight: 20, fontSize: "1.3rem" }}>
+              Quantity:
+            </strong>
+            <Button onClick={() => dispatch(decrement())}>-</Button>
+            <Input
+              style={{
+                width: 50,
+                textAlign: "center",
+              }}
+              value={quantity}
+              onChange={(e) => e.target.value}
+              min={0}
+            />
+            <Button onClick={() => dispatch(increment())}>+</Button>
+          </div>
+          <div
+            style={{
+              marginTop: 30,
+              display: "flex",
+            }}
           >
-            Buy now
-          </Button>
-        </Link>
-      </div>
-    </div>
+            <div>
+              <Button
+                size="large"
+                style={{ width: 95, fontSize: "1.1rem" }}
+                onClick={() => {
+                  setPricing(price);
+                  setDiscounting(discount);
+                  setDuration("1 month");
+                }}
+              >
+                1 month
+              </Button>
+              <Button
+                size="large"
+                style={{ width: 95, fontSize: "1.1rem" }}
+                onClick={() => {
+                  setPricing(price * 2);
+                  setDiscounting(discount / 2);
+                  setDuration("6 months");
+                }}
+              >
+                6 months
+              </Button>
+            </div>
+            <div>
+              <Button
+                size="large"
+                style={{ width: 95, fontSize: "1.1rem" }}
+                onClick={() => {
+                  setPricing(price * 3);
+                  setDiscounting(discount / 2);
+                  setDuration("1 year");
+                }}
+              >
+                1 year
+              </Button>
+              <Button
+                size="large"
+                style={{ width: 95, fontSize: "1.1rem" }}
+                onClick={() => {
+                  setPricing(price * 5);
+                  setDiscounting(discount / 2);
+                  setDuration("Life time");
+                }}
+              >
+                Life time
+              </Button>
+            </div>
+          </div>
+          <div style={{ marginTop: 30 }}>
+            <Button
+              size="large"
+              ghost
+              danger
+              icon={<ShoppingCartOutlined />}
+              onClick={addProductToCart}
+              style={{ width: 170, marginRight: 20, fontSize: "1.1rem" }}
+            >
+              Add to cart
+            </Button>
+            <Link to={!duration ? `/products/${id}` : "/cart"}>
+              <Button
+                type="primary"
+                danger
+                size="large"
+                icon={<DollarOutlined />}
+                onClick={buyNow}
+                style={{ width: 170, fontSize: "1.1rem" }}
+              >
+                Buy now
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

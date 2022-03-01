@@ -19,6 +19,7 @@ import {
   selectUserName,
   selectUserEmail,
 } from "../features/counter/userSlice";
+import { getSearch } from "../features/counter/productSlice";
 import { showForm, formState } from "../features/counter/formSlice";
 import { resetCart } from "../features/counter/cartSlice";
 import { auth } from "../features/auth/userAuth";
@@ -73,22 +74,24 @@ const MobileMenu = () => {
           </Menu.Item>
         </Link>
         <Menu.Divider />
-        <Menu.Item key="2">
-          <QqCircleFilled className="icon" />
-          Entertaining
-        </Menu.Item>
-        <Menu.Item key="3">
-          <HourglassFilled className="icon" />
-          Gaming
-        </Menu.Item>
-        <Menu.Item key="4">
-          <RocketFilled className="icon" />
-          Applications
-        </Menu.Item>
-        <Menu.Item key="5">
-          <ThunderboltFilled className="icon" />
-          Data
-        </Menu.Item>
+        <Link to="./search">
+          <Menu.Item key="2" onClick={() => dispatch(getSearch("entertain"))}>
+            <QqCircleFilled className="icon" />
+            Entertaining
+          </Menu.Item>
+          <Menu.Item key="3" onClick={() => dispatch(getSearch("games"))}>
+            <HourglassFilled className="icon" />
+            Gaming
+          </Menu.Item>
+          <Menu.Item key="4" onClick={() => dispatch(getSearch("apps"))}>
+            <RocketFilled className="icon" />
+            Applications
+          </Menu.Item>
+          <Menu.Item key="5" onClick={() => dispatch(getSearch("data"))}>
+            <ThunderboltFilled className="icon" />
+            Data
+          </Menu.Item>
+        </Link>
         <Menu.Divider />
         {userEmail ? (
           <Link to="./">

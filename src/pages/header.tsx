@@ -1,31 +1,16 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Layout,
-  Input,
-  Menu,
-  Badge,
-  Avatar,
-  Dropdown,
-  Button,
-} from "antd";
-import { Row, Col, Divider } from "antd";
+import React, { useEffect } from "react";
+import { Typography, Input, Badge, Dropdown, Row, Col } from "antd";
 
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import meta from "../dataStorage/images/meta.png";
-import {
-  addCartItem,
-  removeCartItem,
-  currentCart,
-} from "../features/counter/cartSlice";
+import { currentCart } from "../features/counter/cartSlice";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 import {
   setActiveUser,
-  setUserLogOut,
   selectUserName,
   selectUserEmail,
 } from "../features/counter/userSlice";
@@ -34,7 +19,7 @@ import { auth } from "../features/auth/userAuth";
 import { LoginMenu, UserMenu, ItemsInCart } from "./headerMenu";
 import MobileMenu from "../components/mobileMenu";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { Search } = Input;
 
 const onSearch = (value: string) => {
@@ -51,13 +36,10 @@ const AppHeader = () => {
     (sum, product) => sum + product.qty,
     0
   );
-  console.log("quantity", productQuantity);
-  console.log(typeof productQuantity);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        console.log("new User");
         dispatch(
           setActiveUser({
             userName: authUser.displayName,
@@ -110,7 +92,11 @@ const AppHeader = () => {
                 style={{ width: 50, height: 50, borderRadius: 5 }}
               />
               <Title
-                style={{ color: "white", marginLeft: 10, textAlign: "center" }}
+                style={{
+                  color: "white",
+                  marginLeft: 10,
+                  textAlign: "center",
+                }}
                 level={3}
               >
                 META GAMING

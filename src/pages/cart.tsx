@@ -43,15 +43,15 @@ const Cart = () => {
           <DollarOutlined className="icon" />
           PRODUCTS THAT YOU MIGHT LIKE
         </h2>
-        <Row justify="space-around" className="products-container">
+        <Row justify="start" className="products-container">
           {similarProducts.slice(0, productQty).map((item) => {
             return (
               <Col
                 className="gutter-row"
-                lg={{ span: 5 }}
-                md={{ span: 7 }}
-                sm={{ span: 11 }}
-                xs={{ span: 22 }}
+                lg={{ span: 6 }}
+                md={{ span: 6 }}
+                sm={{ span: 12 }}
+                xs={{ span: 24 }}
               >
                 <ProductCard product={item} />
               </Col>

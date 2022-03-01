@@ -1,18 +1,16 @@
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {
-  showForm,
   formState,
   showAddressForm,
   addressFormState,
 } from "../features/counter/formSlice";
-import { Layout, Affix, BackTop } from "antd";
+import { Affix, BackTop, Row, Col } from "antd";
 import {
   UpCircleFilled,
   MessageTwoTone,
   CloseCircleFilled,
 } from "@ant-design/icons";
-import { Steps, Row, Col } from "antd";
 
 import "antd/dist/antd.css";
 import "./home.scss";
@@ -22,7 +20,6 @@ import AddressForm from "../components/addressForm";
 import AppHeader from "./header";
 import Routes from "../routes/routes";
 import Footer from "./footer";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 const AppLayout = () => {
   const stateOfForm = useAppSelector(formState);
@@ -30,7 +27,7 @@ const AppLayout = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="mainContainer">
+    <div>
       <div className="form" onClick={(e) => e.stopPropagation()}>
         <Affix offsetTop={-200}>{stateOfForm ? <LoginForm /> : null}</Affix>
       </div>
@@ -54,7 +51,13 @@ const AppLayout = () => {
         ) : null}
       </Affix>
 
-      <div style={{ opacity: stateOfForm || addressForm ? 0.5 : 1 }}>
+      <div
+        className="mainContainer"
+        style={{
+          filter:
+            stateOfForm || addressForm ? "brightness(50%)" : "brightness(100%)",
+        }}
+      >
         <Affix offsetTop={0}>
           <AppHeader />
         </Affix>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../api/apiProducts";
 
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import axios from "axios";
 import { Row, Col } from "antd";
 import ImageDetail from "../components/imageDetail";
 import DescriptionDetail from "../components/descriptionDetail";
@@ -12,8 +11,8 @@ interface paramsType {
 }
 
 const ProductDetail = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const { productId } = useParams<paramsType>();
-  const dispatch = useAppDispatch();
 
   const [item, setItem] = useState({
     id: 1,
@@ -28,11 +27,15 @@ const ProductDetail = () => {
     qty: 0,
   });
   const fetchProductDetail = async () => {
-    const response: any = await api
-      .get(`/products/${productId}`)
-      .catch((err) => console.log(err));
+    setIsLoading(true);
+    try {
+      const response: any = await axios.get(`/products/${productId}`);
+      if (response.data) setItem(response.data);
+    } catch (err) {
+      console.log(err);
+    }
 
-    if (response.data) setItem(response.data);
+    setIsLoading(false);
   };
   useEffect(() => {
     if (productId && productId !== "") fetchProductDetail();
@@ -49,7 +52,7 @@ const ProductDetail = () => {
             sm={{ span: 24 }}
             xs={{ span: 24 }}
           >
-            <ImageDetail item={item} />
+            <ImageDetail item={item} isLoading={isLoading} />
           </Col>
           <Col
             className="gutter-row"
@@ -58,7 +61,7 @@ const ProductDetail = () => {
             sm={{ span: 24 }}
             xs={{ span: 24 }}
           >
-            <DescriptionDetail item={item} />
+            <DescriptionDetail item={item} isLoading={isLoading} />
           </Col>
         </Row>
       </div>

@@ -138,6 +138,27 @@ const AddressPicker = (props: any) => {
                 return <Option value={district.code}>{district.name}</Option>;
               })
             : null}
+          <Select
+            showSearch
+            placeholder="Ward..."
+            optionFilterProp="children"
+            defaultActiveFirstOption={true}
+            onChange={(value: number) => setWardCode(value)}
+            filterOption={(input, option: any) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            filterSort={(optionA: any, optionB: any) =>
+              optionA.children
+                .toLowerCase()
+                .localeCompare(optionB.children.toLowerCase())
+            }
+          >
+            {wards
+              ? wards.map((ward: any) => {
+                  return <Option value={ward.code}>{ward.name}</Option>;
+                })
+              : null}
+          </Select>
         </Select>
 
         <Select

@@ -1,46 +1,55 @@
 import React, { useState } from "react";
 import { Image } from "antd";
+import { ImageDetailSkeleton } from "./skeleton";
 
-const ImageDetail = ({ item }: any) => {
+const ImageDetail = ({ item, isLoading }: any) => {
   const [index, setIndex] = useState(0);
 
   return (
     <>
-      <div style={{ marginBottom: 20 }}>
-        <Image
-          src={`/${item.img[index]}`}
-          alt={item.name}
-          style={{
-            width: "100%",
-            borderRadius: 5,
-          }}
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          cursor: "pointer",
-        }}
-      >
-        {item.img.map((item: String, index: number) => {
-          return (
-            <img
-              src={`/${item}`}
-              alt={"images"}
-              key={index}
+      {isLoading ? (
+        <ImageDetailSkeleton />
+      ) : (
+        <>
+          <div style={{ marginBottom: 20 }}>
+            <Image
+              src={`${item.img[index]}`}
+              alt={item.name}
               style={{
-                width: "23%",
-                display: "block",
+                width: "100%",
                 borderRadius: 5,
-                objectFit: "fill",
-                padding: 0,
               }}
-              onClick={() => setIndex(index)}
             />
-          );
-        })}
-      </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              cursor: "pointer",
+            }}
+          >
+            {item.img.map((item: String, index: number) => {
+              return (
+                <div className="smallImg" tabIndex={1}>
+                  <img
+                    src={`${item}`}
+                    alt={"images"}
+                    key={index}
+                    style={{
+                      width: "100%",
+                      display: "block",
+                      borderRadius: 5,
+                      objectFit: "fill",
+                      padding: 0,
+                    }}
+                    onMouseEnter={() => setIndex(index)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
     </>
   );
 };

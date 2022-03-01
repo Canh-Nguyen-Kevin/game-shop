@@ -13,6 +13,7 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyBC8cvjQCa51-6K2Gegqga92rWWeHxYHEM",
   authDomain: "game-shop-501dc.firebaseapp.com",
+
   projectId: "game-shop-501dc",
   storageBucket: "game-shop-501dc.appspot.com",
   messagingSenderId: "375091939910",
