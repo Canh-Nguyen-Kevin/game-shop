@@ -7,7 +7,6 @@ import {
   getAuth,
   GoogleAuthProvider,
   FacebookAuthProvider,
-  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseConfig = {

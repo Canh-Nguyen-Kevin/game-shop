@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { checkProduct, currentCart } from "../features/counter/cartSlice";
+import { currentCart } from "../features/counter/cartSlice";
 import { allProducts } from "../features/counter/productSlice";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 
 import { Row, Col, Button, Result } from "antd";
 import { DollarOutlined } from "@ant-design/icons";

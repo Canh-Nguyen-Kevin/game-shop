@@ -14,7 +14,6 @@ import {
 } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {
-  setActiveUser,
   setUserLogOut,
   selectUserName,
   selectUserEmail,

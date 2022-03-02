@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Menu, Image, Button } from "antd";
 
@@ -12,20 +12,10 @@ import {
   MailFilled,
 } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { showForm, formState } from "../features/counter/formSlice";
-import {
-  addCartItem,
-  removeCartItem,
-  currentCart,
-  resetCart,
-} from "../features/counter/cartSlice";
+import { showForm } from "../features/counter/formSlice";
+import { currentCart, resetCart } from "../features/counter/cartSlice";
 
-import {
-  setActiveUser,
-  setUserLogOut,
-  selectUserName,
-  selectUserEmail,
-} from "../features/counter/userSlice";
+import { setActiveUser, setUserLogOut } from "../features/counter/userSlice";
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -52,10 +42,10 @@ export const LoginMenu = () => {
           email: result.user.email,
           token: token,
         };
-        // if (localStorage.getItem("user")) return;
+
         localStorage.setItem("user", JSON.stringify(loginUser));
         const getUser: any = localStorage.getItem("user");
-        // console.log("result", getUser);
+
         dispatch(
           setActiveUser({
             userName: loginUser.userName,
