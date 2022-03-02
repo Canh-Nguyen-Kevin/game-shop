@@ -1,39 +1,60 @@
-import React, { useState } from "react";
-import { Layout, Input, Menu, Breadcrumb, Badge, Avatar } from "antd";
+import React, { useEffect, useState } from "react";
+import { Row, Col } from "antd";
 import "antd/dist/antd.css";
+import { getAllProducts, getLoading } from "../features/counter/productSlice";
+import { useAppDispatch } from "../app/hooks";
+import axios from "axios";
 
-import HomeSider from "./sider";
-import Slider from "../features/slider";
-
-const { Content } = Layout;
+import HomeSider from "../components/homesider";
+import Slider from "../components/slider";
+import Products from "./products";
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  console.log("loading", loading);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      dispatch(getLoading(true));
+      try {
+        const response: any = await axios.get("/products/");
+        dispatch(getAllProducts(response.data));
+      } catch (err) {
+        console.log(err);
+      }
+
+      setLoading(false);
+      dispatch(getLoading(false));
+    };
+
+    fetchProducts();
+  }, []);
   return (
-    <Layout
-      style={{
-        width: "80%",
-        margin: "0 auto",
-      }}
-    >
-      <HomeSider />
-      <Layout>
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 10,
-            margin: 0,
-            minHeight: 280,
-          }}
+    <>
+      <Row align="middle" justify="space-around" className="products-container">
+        <Col
+          className="gutter-row"
+          lg={{ span: 4 }}
+          md={{ span: 0 }}
+          sm={{ span: 0 }}
+          xs={{ span: 0 }}
         >
-          <Slider />
-        </Content>
-      </Layout>
-    </Layout>
+          <HomeSider loading={loading} />
+        </Col>
+        <Col
+          className="gutter-row"
+          lg={{ span: 19 }}
+          md={{ span: 21 }}
+          sm={{ span: 22 }}
+          xs={{ span: 22 }}
+        >
+          <Slider loading={loading} />
+        </Col>
+      </Row>
+
+      <Products loading={loading} />
+    </>
   );
 };
 
